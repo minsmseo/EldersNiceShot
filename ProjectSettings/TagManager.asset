@@ -12,8 +12,8 @@ TagManager:
   - Water
   - UI
   - Gameobjects
-  - 
-  - 
+  - Player
+  - Ignore_Collider
   - 
   - 
   - 
