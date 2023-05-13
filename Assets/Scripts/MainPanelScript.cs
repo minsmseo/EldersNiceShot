@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-
 public class MainPanelScript : MonoBehaviour
 {
     public GameObject buttonLeft;
@@ -18,6 +17,8 @@ public class MainPanelScript : MonoBehaviour
     public GameObject stageImage;
     private Image stageImageImageComponent;
 
+    //public TextMeshProUGUI levelText;
+
     private int currentStage;
     private int stageCount;
     private Sprite[] previewSprites ;
@@ -28,7 +29,7 @@ public class MainPanelScript : MonoBehaviour
         {
             stageImageImageComponent = stageImage.GetComponent<Image>();
         }
-        stageCount = 10;
+        stageCount = 2;
         previewSprites = new Sprite[stageCount];
         currentStage = 1;
     }
@@ -55,13 +56,15 @@ public class MainPanelScript : MonoBehaviour
 
     public void change_stage(int stage)
     {
-        set_stage_text(stage);
+        
         set_stage_image(stage);
+        set_stage_text(stage);
     }
 
     private void set_stage_text(int stage)
     {
-        stageText.text = "stage: " + stage.ToString();
+        int stageNum = stage + 1; 
+        stageText.text = "stage: " + stageNum.ToString();
     }
 
     private void set_stage_image(int stage)
@@ -82,7 +85,7 @@ public class MainPanelScript : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
-        Application.Quit(); // ¾îÇÃ¸®ÄÉÀÌ¼Ç Á¾·á
+        Application.Quit(); // ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 #endif
     }
 
