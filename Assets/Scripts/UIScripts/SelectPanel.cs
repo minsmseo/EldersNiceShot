@@ -17,6 +17,7 @@ public class SelectPanel : MonoBehaviour
     public GameObject selectPanel;
     public GameObject chooseLVPanel;
 
+
     public GameObject stageImage;
     private Image stageImageImageComponent;
    
@@ -40,23 +41,33 @@ public class SelectPanel : MonoBehaviour
         //previewSprites = new Sprite[stageCount];
         currentStage = 1;
 
+        stageText.text = "stage: " + currentStage.ToString();
+
         buttonLeft.GetComponent<Button>().onClick.AddListener(buttonLeft_clicked);
         buttonRight.GetComponent<Button>().onClick.AddListener(buttonRight_clicked);
         buttonBack.GetComponent<Button>().onClick.AddListener(buttonBack_clicked);
-        stageImage.GetComponent<Button>().onClick.AddListener(move_to_Game);
-
+        stageImage.GetComponent<Button>().onClick.AddListener(moveToGame);
         
-       
-
-
-
-
+        
     }
 
-    public void move_to_Game()
+
+    public void moveToGame()
     {
-        SceneManager.LoadScene("Stage_1");
+        StartCoroutine(LoadingScene());
     }
+
+    IEnumerator LoadingScene()
+    {
+        AsyncOperation loading = SceneManager.LoadSceneAsync("Stage_1");
+        
+        while (!loading.isDone) //씬 로딩 완료시 로딩완료시 완료
+        {
+            
+            yield return null;
+        }
+    }
+
 
 
     public void buttonBack_clicked()
@@ -117,5 +128,7 @@ public class SelectPanel : MonoBehaviour
 #endif
     }
 
+
+ 
 
 }
