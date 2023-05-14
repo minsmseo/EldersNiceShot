@@ -123,24 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &4464584 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6824548204133446245, guid: d1eb2639de0750b45adf6fdd24a601ae,
-    type: 3}
-  m_PrefabInstance: {fileID: 433648166}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4464586 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3011186939719877028, guid: d1eb2639de0750b45adf6fdd24a601ae,
-    type: 3}
-  m_PrefabInstance: {fileID: 433648166}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4464584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!850595691 &75523392
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -321,12 +303,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonExit: {fileID: 2051824066}
   level1: {fileID: 417252427}
-  level2: {fileID: 4464584}
+  level2: {fileID: 1937941632}
   chooseLVPanel: {fileID: 141006672}
   selectPanel: {fileID: 532615619}
   stageImage: {fileID: 0}
   level1Button: {fileID: 417252429}
-  level2Button: {fileID: 4464586}
+  level2Button: {fileID: 1937941634}
   exitButton: {fileID: 2051824068}
 --- !u!114 &88630096
 MonoBehaviour:
@@ -950,12 +932,12 @@ PrefabInstance:
     - target: {fileID: 4258110195719222106, guid: d1eb2639de0750b45adf6fdd24a601ae,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -79
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 4258110195719222106, guid: d1eb2639de0750b45adf6fdd24a601ae,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 66
+      value: -41
       objectReference: {fileID: 0}
     - target: {fileID: 4258110195719222106, guid: d1eb2639de0750b45adf6fdd24a601ae,
         type: 3}
@@ -2661,7 +2643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b69eb3f1c55974bb1bcc1dbc547a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openTime: 57
+  openTime: 59
 --- !u!4 &1532103856
 Transform:
   m_ObjectHideFlags: 0
@@ -2778,7 +2760,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh104422
+  m_Name: pb_Mesh36470
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2958,7 +2940,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh104458
+  m_Name: pb_Mesh36506
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3205,6 +3187,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 138686975}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1937941632 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8304655522678509687, guid: d1eb2639de0750b45adf6fdd24a601ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 433648166}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1937941634 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2156307076764563064, guid: d1eb2639de0750b45adf6fdd24a601ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 433648166}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937941632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2051824066 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6539870871836922870, guid: d1eb2639de0750b45adf6fdd24a601ae,
