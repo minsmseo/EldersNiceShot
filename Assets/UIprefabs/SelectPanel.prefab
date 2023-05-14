@@ -171,7 +171,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 95, y: 251.81}
+  m_AnchoredPosition: {x: 217, y: 329}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2919783804386461850
@@ -292,7 +292,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -618, y: 251.81}
+  m_AnchoredPosition: {x: -681, y: 326}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.49999994, y: 0.5}
 --- !u!222 &2919783804430605659
@@ -424,7 +424,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -277, y: 277}
+  m_AnchoredPosition: {x: -220, y: 343}
   m_SizeDelta: {x: 690.2536, y: 230.6802}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2919783805530762518
@@ -565,7 +565,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 850.84863, y: 338.35583}
-  m_SizeDelta: {x: 1982.354, y: 758.4436}
+  m_SizeDelta: {x: 2808.522, y: 959.9398}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2919783806361121649
 CanvasRenderer:
@@ -642,8 +642,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 619, y: -204}
-  m_SizeDelta: {x: 600, y: 150}
+  m_AnchoredPosition: {x: 803, y: -261.93}
+  m_SizeDelta: {x: 477.3057, y: 115.7597}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1543914569933003047
 CanvasRenderer:
@@ -763,8 +763,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -248, y: -67}
-  m_SizeDelta: {x: 874.0931, y: 437.6287}
+  m_AnchoredPosition: {x: -212.75879, y: -92.43994}
+  m_SizeDelta: {x: 1156.5754, y: 454.7488}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5548955673077581414
 CanvasRenderer:
