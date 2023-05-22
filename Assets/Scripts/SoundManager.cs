@@ -3,16 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum eSFX
 {
-	e1,
-	e2
+	eHit_Strong,
+	eHit_Weak,
+	eBall_Rolling,
+	eUI_Button
+}
+public enum eUIButtonClick
+{
+	eOption
+}
+public enum eBGM
+{
+	eMemoryOfBeach,
+	eSunnyDay
 }
 public class SoundManager : MonoBehaviour
 {
 
 	// Audio players components.
-	public AudioSource EffectsSource;
-	public AudioSource MusicSource;
-
+	public AudioSource Effect;
+	public AudioSource BGM,Effectbgm;
+	public AudioClip[] EffectList, Effectbgmlist, GameOverList, BGMList;
 	// Random pitch adjustment range.
 	public float LowPitchRange = .95f;
 	public float HighPitchRange = 1.05f;
@@ -37,30 +48,21 @@ public class SoundManager : MonoBehaviour
 		//Set SoundManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
 		DontDestroyOnLoad(gameObject);
 	}
-
-	// Play a single clip through the sound effects source.
-	public void Play(AudioClip clip)
-	{
-		EffectsSource.clip = clip;
-		EffectsSource.Play();
-	}
-
 	// Play a single clip through the music source.
-	public void PlayMusic(AudioClip clip)
+	public void PlayBGM(eBGM ebgm)
 	{
-		MusicSource.clip = clip;
-		MusicSource.Play();
+		BGM.clip = BGMList[(int)ebgm];
+		BGM.Play();
 	}
-
-	// Play a random clip from an array, and randomize the pitch slightly.
-	public void RandomSoundEffect(params AudioClip[] clips)
+	//
+	public void PlayEffectSound(eSFX esfx)
 	{
-		int randomIndex = Random.Range(0, clips.Length);
-		float randomPitch = Random.Range(LowPitchRange, HighPitchRange);
-
-		EffectsSource.pitch = randomPitch;
-		EffectsSource.clip = clips[randomIndex];
-		EffectsSource.Play();
+		Effect.clip = EffectList[(int)esfx];
+		Effect.Play();
 	}
-
+	public void PlayEffectbgmSound(int index)
+	{
+		Effectbgm.clip = Effectbgmlist[index];
+		Effectbgm.Play();
+	}
 }
