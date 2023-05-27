@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class FollowObject : MonoBehaviour
 {
-    public GameObject hammer;
-    public RectTransform uiPanel;
+    public GameObject mainCam;
+    public GameObject UIPanel;
 
+    float distance = 3f;
+    
 
     // Update is called once per frame
     void Update()
     {
 
-        uiPanel.position = Camera.main.WorldToScreenPoint(hammer.transform.position);
+        // Vector3 cameraToObj =  UIPanel.transform.position - mainCam.transform.position;
+        // float angle = Vector3.Angle(cameraToObj, mainCam.transform.forward);
+        // float x = Mathf.Cos(angle * Mathf.Deg2Rad) * distance;
+        // float z = Mathf.Sin(angle * Mathf.Deg2Rad) * distance;
+
+        UIPanel.transform.position = mainCam.transform.position + 3*mainCam.transform.forward;
+        UIPanel.transform.rotation = mainCam.transform.rotation;
+        
     }
 }
