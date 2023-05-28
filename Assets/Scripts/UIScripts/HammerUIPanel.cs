@@ -15,19 +15,27 @@ public class HammerUIPanel : MonoBehaviour
     public GameObject hammerUIPanel;
 
 
-    private void Awake()
+
+    public void Awake()
     {
+        SetAddListener();
+    }
+
+    public void SetAddListener()
+    {
+
         settingButton.onClick.AddListener(buttonSetting_clicked);
         manualButton.onClick.AddListener(buttonManual_clicked);
         backButton.onClick.AddListener(buttonBack_clicked);
         exitButton.onClick.AddListener(buttonExit_clicked);
 
-
     }
-
     public void buttonSetting_clicked()
     {
-        hammerUIPanel.SetActive(false);
+        //hammerUIPanel.SetActive(false);
+        ColorBlock col = settingButton.colors;
+        col.normalColor = new Color(255, 20, 147);
+        settingButton.colors = col;
 
     }
 
