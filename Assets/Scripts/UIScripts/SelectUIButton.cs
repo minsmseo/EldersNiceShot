@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SelectUIButton : MonoBehaviour
 {
+    //public AudioSource audioSource = AddComponent<AudioSource>();
     public InputDeviceCharacteristics rightControllerCharacteristics;
     public InputDeviceCharacteristics leftControllerCharacteristics;
     private InputDevice rightDevice;
@@ -21,7 +22,7 @@ public class SelectUIButton : MonoBehaviour
  
 
     private int selectNum = 0;
-    private int oldNum;
+    //private int oldNum;
     private ColorBlock col;
 
     private bool isThumbstickUp = false;
@@ -32,11 +33,12 @@ public class SelectUIButton : MonoBehaviour
     {
         TryInitialize();
         SetButtonArray();
+        SetButtonSound();
 
         //preCol 표본
-        col = btnPrefab.colors;
-        col= UIButtons[selectNum].colors;
-        //col.normalColor = UIButtons[selectNum].colors.normalColor;
+        //col = btnPrefab.colors;
+        col = UIButtons[selectNum].colors;
+        col.normalColor = UIButtons[selectNum].colors.normalColor;
 
     }
 
@@ -46,6 +48,16 @@ public class SelectUIButton : MonoBehaviour
         UIButtons[1] = manualButton;
         UIButtons[2] = backButton;
         UIButtons[3] = exitButton;
+
+        
+    }
+
+    private void SetButtonSound()
+    {
+        for (int i = 0; i < UIButtons.Length; i++)
+        {
+            UIButtons[i].onClick.AddListener(PlayButtonClickSound);
+        }
     }
 
 
@@ -76,6 +88,15 @@ private void Update()
     {
         MpveUpDown();
         PressButton();
+    }
+
+    private void PlayButtonClickSound()
+    {
+        // SoundManager 인스턴스를 가져옴
+        SoundManager soundManager = SoundManager.Instance;
+
+        // SoundManager를 사용하여 버튼 효과음 재생
+        soundManager.PlayEffectSound(eSFX.eUI_Button);
     }
 
     private void MpveUpDown()
@@ -138,6 +159,8 @@ private void Update()
         }
         selectNum %= 4;
 
+        //audioSource.Play();
+
 
         GetBack(); // 이전 애들 돌려놓기 
 
@@ -175,7 +198,7 @@ private void Update()
 
         UIButtons[preNum].colors = col;
         UIButtons[nextNum].colors = col;
-        preCol = UIButtons[selectNum].colors;
+        //preCol = UIButtons[selectNum].colors;
     }
 
 
