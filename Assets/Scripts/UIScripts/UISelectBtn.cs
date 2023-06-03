@@ -1,41 +1,46 @@
+using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.UI;
 
-public class SelectUIButton : MonoBehaviour
+
+
+public class UISelectBtn : MonoBehaviour
 {
-    public InputDeviceCharacteristics rightControllerCharacteristics;
-    public InputDeviceCharacteristics leftControllerCharacteristics;
-    private InputDevice rightDevice;
-    private InputDevice leftDevice;
-
-    public Button settingButton;
-    public Button manualButton;
-    public Button backButton;
-    public Button exitButton;
-
-    //public Button btnPrefab; 
+    public InputDeviceCharacteristics rightControllerCharacteristics, leftControllerCharacteristics;
+    private InputDevice rightDevice, leftDevice;
+    public Button settingButton, manualButton, backButton, exitButton;
 
     private Button[] UIButtons = new Button[4];
 
-
     private int selectNum = 0;
-    private ColorBlock col;
+    private ColorBlock[] oldCol = new ColorBlock[4];
+    private ColorBlock selectCol;
 
     private bool isThumbstickUp = false;
     private bool isThumbstickDown = false;
+
+    //public Button btnPrefab;
 
 
     public void Awake()
     {
         TryInitialize();
         SetButtonArray();
-        
-        //col = btnPrefab.colors;
-        col = UIButtons[selectNum].colors;
-        col.normalColor = UIButtons[selectNum].colors.normalColor;
 
+
+        for (int i = 0; i < UIButtons.Length; i++)
+        {
+            oldCol[i] = UIButtons[selectNum].colors;
+        }
+        //oldCol에 각각의 col 저장
+
+        selectCol = UIButtons[selectNum].colors;
+        selectCol.normalColor = new Color(1f, 0f, 0f, 1f);
+        UIButtons[selectNum].colors = selectCol;
+        //0번째 btn 색 바꾸기 시작 
     }
 
 
@@ -45,9 +50,6 @@ public class SelectUIButton : MonoBehaviour
         UIButtons[1] = manualButton;
         UIButtons[2] = backButton;
         UIButtons[3] = exitButton;
-
-
-
     }
 
 
@@ -60,12 +62,9 @@ public class SelectUIButton : MonoBehaviour
         InputDevices.GetDevicesWithCharacteristics(rightControllerCharacteristics, RinputDevices);
         InputDevices.GetDevicesWithCharacteristics(leftControllerCharacteristics, LinputDevices);
 
-
-
         if (RinputDevices.Count > 0)
         {
             rightDevice = RinputDevices[0];
-
         }
 
         if (LinputDevices.Count > 0)
@@ -78,39 +77,33 @@ public class SelectUIButton : MonoBehaviour
 
     private void Update()
     {
-        MpveUpDown();
+        MoveJoyStick();
         PressButton();
     }
 
-    private void MpveUpDown()
+    private void MoveJoyStick()
     {
         if (rightDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 position))
         {
-
-
             if (position.y > 0.5f && !isThumbstickUp)
             {
-
-                selectNum--;
+               
                 isThumbstickUp = true;
-                ChangeButton();
-                //버튼 바꾸기 
-
+                ReturnOldBtnColor();
+                MoveUp();           
             }
             else if (position.y < -0.5f && !isThumbstickDown)
             {
-
-                selectNum++;
+               
                 isThumbstickDown = true;
-                ChangeButton();
-
-
+                ReturnOldBtnColor();
+                MoveDown();
+                
             }
             else if (position.y >= -0.5f && position.y <= 0.5f)
             {
                 isThumbstickUp = false;
                 isThumbstickDown = false;
-
             }
         }
     }
@@ -123,63 +116,32 @@ public class SelectUIButton : MonoBehaviour
             {
                 SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
                 UIButtons[selectNum].onClick.Invoke();
-               
             }
-
         }
     }
 
-    private void ChangeButton()
+ 
+    private void ReturnOldBtnColor()
     {
-        //버튼 바꾸기 
+        int oldNum = selectNum;
+        UIButtons[oldNum].colors = oldCol[oldNum];
+    }
+    private void MoveUp()
+    {
+        selectNum += UIButtons.Length;
+        selectNum--;
+        selectNum %= UIButtons.Length;
 
-
-        if (selectNum < 0)
-        {
-            selectNum += 4;
-
-        }
-        selectNum %= 4;
-
-
-        GetBack(); // 이전 애들 돌려놓기 
-        SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
-        // 현재 selectNum의 색 바꾸기 
-        ColorBlock col = UIButtons[selectNum].colors;
-        //현재 select Num의 colors 속성 col에 저장
-
-        col.normalColor = new Color(0, 0, 0);
-        //col.의 normalColr 변경
-
-        UIButtons[selectNum].colors = col;
-        //현재 selecNum color -> col == 선택되었을때의 색깔 변경 완
-
-
-
-
-
-        //UIButtons[selectNum].colors.normalColor = col.selectedColor;
-
-
-
-
+        selectCol.normalColor = new Color(1f, 0f, 0f, 1f);
+        UIButtons[selectNum].colors = selectCol;
     }
 
-    // 현재 selectNum 위 아래 버튼 색깔을 동일하게 바꿔주는 함수
-    private void GetBack()
+    private void MoveDown()
     {
-        int preNum = selectNum - 1;
-        int nextNum = selectNum + 1;
-
-        if (preNum < 0) { preNum = 3; }
-        else if (nextNum > 3) { nextNum = 0; }
-        // 고정 
-
-
-        UIButtons[preNum].colors = col;
-        UIButtons[nextNum].colors = col;
-        //preCol = UIButtons[selectNum].colors;
+        selectNum++;
+        selectNum %= UIButtons.Length;
+        selectCol.normalColor = new Color(1f, 0f, 0f, 1f);
+        UIButtons[selectNum].colors = selectCol;
     }
-
-
 }
+

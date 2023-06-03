@@ -7,20 +7,15 @@ using TMPro;
 public class ChooseLVPanel : MonoBehaviour
 {
 
-    public GameObject buttonExit;
-    public GameObject level1, level2;
-    //public GameObject level2;
+    //public GameObject buttonExit;
+    //public GameObject level1, level2;
     public GameObject chooseLVPanel, selectPanel;
-    //public GameObject selectPanel;
 
     public GameObject stageImage;
     private int currentLevel;
 
-    //private Button level1Button;
-    //private Button level2Button;
-    public Button level1Button;
-    public Button level2Button;
-    public Button exitButton;
+    public Button level1Button, level2Button, exitButton;
+   
 
 
     //private Image stageImageImageComponent;

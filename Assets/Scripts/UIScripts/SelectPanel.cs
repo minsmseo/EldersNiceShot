@@ -42,17 +42,18 @@ public class SelectPanel : MonoBehaviour
         currentStage = 1;
 
         stageText.text = "stage: " + currentStage.ToString();
+        currentStage++;
 
-        buttonLeft.GetComponent<Button>().onClick.AddListener(buttonLeft_clicked);
-        buttonRight.GetComponent<Button>().onClick.AddListener(buttonRight_clicked);
-        buttonBack.GetComponent<Button>().onClick.AddListener(buttonBack_clicked);
-        stageImage.GetComponent<Button>().onClick.AddListener(moveToGame);
+        buttonLeft.GetComponent<Button>().onClick.AddListener(ButtonLeftClicked);
+        buttonRight.GetComponent<Button>().onClick.AddListener(ButtonRightClicked);
+        buttonBack.GetComponent<Button>().onClick.AddListener(ButtonBackClicked);
+        stageImage.GetComponent<Button>().onClick.AddListener(MoveToGame);
         
         
     }
 
 
-    public void moveToGame()
+    public void MoveToGame()
     {
         StartCoroutine(LoadingScene());
         SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
@@ -71,14 +72,14 @@ public class SelectPanel : MonoBehaviour
 
 
 
-    public void buttonBack_clicked()
+    public void ButtonBackClicked()
     {
         chooseLVPanel.SetActive(true);
         selectPanel.SetActive(false);
         SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
     }
 
-    public void buttonLeft_clicked()
+    public void ButtonLeftClicked()
     {
         currentStage += stageCount;
         currentStage--;
@@ -88,7 +89,7 @@ public class SelectPanel : MonoBehaviour
 
     }
 
-    public void buttonRight_clicked()
+    public void ButtonRightClicked()
     {
         currentStage++;
         currentStage %= stageCount;
@@ -111,8 +112,10 @@ public class SelectPanel : MonoBehaviour
 
     private void set_stage_text(int stage)
     {
+        
         int stageNum = stage + 1;
         stageText.text = "stage: " + stageNum.ToString();
+        
     }
 
     //private void set_stage_image(int stage)

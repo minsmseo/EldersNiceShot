@@ -28,7 +28,7 @@ public class HammerUIPanel : MonoBehaviour
 
     public void SetAddListener()
     {
-
+        Debug.Log("add all the listener");
         settingButton.onClick.AddListener(buttonSetting_clicked);
         manualButton.onClick.AddListener(buttonManual_clicked);
         backButton.onClick.AddListener(buttonBack_clicked);
@@ -40,10 +40,7 @@ public class HammerUIPanel : MonoBehaviour
         //hammerUIPanel.SetActive(false);
         ColorBlock col = settingButton.colors;
         col.normalColor = new Color(255, 20, 147);
-        settingButton.colors = col;
-        
-        
-
+        settingButton.colors = col;             
     }
 
     public void buttonManual_clicked()
