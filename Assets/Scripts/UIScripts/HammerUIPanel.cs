@@ -19,7 +19,12 @@ public class HammerUIPanel : MonoBehaviour
     public void Awake()
     {
         SetAddListener();
+        
     }
+
+
+   
+
 
     public void SetAddListener()
     {
@@ -36,6 +41,8 @@ public class HammerUIPanel : MonoBehaviour
         ColorBlock col = settingButton.colors;
         col.normalColor = new Color(255, 20, 147);
         settingButton.colors = col;
+        
+        
 
     }
 

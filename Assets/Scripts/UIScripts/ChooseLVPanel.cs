@@ -8,10 +8,10 @@ public class ChooseLVPanel : MonoBehaviour
 {
 
     public GameObject buttonExit;
-    public GameObject level1;
-    public GameObject level2;
-    public GameObject chooseLVPanel;
-    public GameObject selectPanel;
+    public GameObject level1, level2;
+    //public GameObject level2;
+    public GameObject chooseLVPanel, selectPanel;
+    //public GameObject selectPanel;
 
     public GameObject stageImage;
     private int currentLevel;
@@ -68,12 +68,14 @@ public class ChooseLVPanel : MonoBehaviour
     {
         selectPanel.SetActive(true);
         chooseLVPanel.SetActive(false);
+        SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
     }
 
     public void choose_level2()
     {
         selectPanel.SetActive(true);
         chooseLVPanel.SetActive(false);
+        SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
     }
 
 
@@ -87,6 +89,8 @@ public class ChooseLVPanel : MonoBehaviour
 
     public void buttonExit_clicked()
     {
+
+        SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

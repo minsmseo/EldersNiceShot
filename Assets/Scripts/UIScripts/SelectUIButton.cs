@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class SelectUIButton : MonoBehaviour
 {
-    //public AudioSource audioSource = AddComponent<AudioSource>();
     public InputDeviceCharacteristics rightControllerCharacteristics;
     public InputDeviceCharacteristics leftControllerCharacteristics;
     private InputDevice rightDevice;
@@ -19,28 +18,26 @@ public class SelectUIButton : MonoBehaviour
     //public Button btnPrefab; 
 
     private Button[] UIButtons = new Button[4];
- 
+
 
     private int selectNum = 0;
-    //private int oldNum;
     private ColorBlock col;
 
     private bool isThumbstickUp = false;
     private bool isThumbstickDown = false;
-    
+
 
     public void Awake()
     {
         TryInitialize();
         SetButtonArray();
-        SetButtonSound();
-
-        //preCol 표본
+        
         //col = btnPrefab.colors;
         col = UIButtons[selectNum].colors;
         col.normalColor = UIButtons[selectNum].colors.normalColor;
 
     }
+
 
     public void SetButtonArray()
     {
@@ -49,16 +46,10 @@ public class SelectUIButton : MonoBehaviour
         UIButtons[2] = backButton;
         UIButtons[3] = exitButton;
 
-        
+
+
     }
 
-    private void SetButtonSound()
-    {
-        for (int i = 0; i < UIButtons.Length; i++)
-        {
-            UIButtons[i].onClick.AddListener(PlayButtonClickSound);
-        }
-    }
 
 
     private void TryInitialize()
@@ -74,7 +65,7 @@ public class SelectUIButton : MonoBehaviour
         if (RinputDevices.Count > 0)
         {
             rightDevice = RinputDevices[0];
-            
+
         }
 
         if (LinputDevices.Count > 0)
@@ -82,21 +73,13 @@ public class SelectUIButton : MonoBehaviour
             leftDevice = LinputDevices[0];
         }
     }
-     
 
-private void Update()
+
+
+    private void Update()
     {
         MpveUpDown();
         PressButton();
-    }
-
-    private void PlayButtonClickSound()
-    {
-        // SoundManager 인스턴스를 가져옴
-        SoundManager soundManager = SoundManager.Instance;
-
-        // SoundManager를 사용하여 버튼 효과음 재생
-        soundManager.PlayEffectSound(eSFX.eUI_Button);
     }
 
     private void MpveUpDown()
@@ -107,20 +90,18 @@ private void Update()
 
             if (position.y > 0.5f && !isThumbstickUp)
             {
-                
+
                 selectNum--;
                 isThumbstickUp = true;
-
                 ChangeButton();
                 //버튼 바꾸기 
 
             }
             else if (position.y < -0.5f && !isThumbstickDown)
             {
-                
+
                 selectNum++;
                 isThumbstickDown = true;
-
                 ChangeButton();
 
 
@@ -140,10 +121,11 @@ private void Update()
         {
             if (YButton == true)
             {
-      
+                SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
                 UIButtons[selectNum].onClick.Invoke();
-
+               
             }
+
         }
     }
 
@@ -159,11 +141,9 @@ private void Update()
         }
         selectNum %= 4;
 
-        //audioSource.Play();
-
 
         GetBack(); // 이전 애들 돌려놓기 
-
+        SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
         // 현재 selectNum의 색 바꾸기 
         ColorBlock col = UIButtons[selectNum].colors;
         //현재 select Num의 colors 속성 col에 저장
@@ -188,11 +168,11 @@ private void Update()
     // 현재 selectNum 위 아래 버튼 색깔을 동일하게 바꿔주는 함수
     private void GetBack()
     {
-        int preNum = selectNum -1;
+        int preNum = selectNum - 1;
         int nextNum = selectNum + 1;
 
-        if(preNum <0) { preNum = 3; }
-        else if ( nextNum > 3) { nextNum = 0; }
+        if (preNum < 0) { preNum = 3; }
+        else if (nextNum > 3) { nextNum = 0; }
         // 고정 
 
 

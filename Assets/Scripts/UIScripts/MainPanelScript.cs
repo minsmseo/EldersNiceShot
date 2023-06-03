@@ -56,7 +56,7 @@ public class MainPanelScript : MonoBehaviour
 
     public void change_stage(int stage)
     {
-        
+        SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
         set_stage_image(stage);
         set_stage_text(stage);
     }
@@ -76,12 +76,15 @@ public class MainPanelScript : MonoBehaviour
 
     public void buttonClose_clicked()
     {
+        SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
         mainPanel.SetActive(false);
         scorePanel.SetActive(true);
     }
 
     public void buttonExit_clicked()
     {
+
+        SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

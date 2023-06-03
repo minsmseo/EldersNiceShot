@@ -55,6 +55,7 @@ public class SelectPanel : MonoBehaviour
     public void moveToGame()
     {
         StartCoroutine(LoadingScene());
+        SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
     }
 
     IEnumerator LoadingScene()
@@ -74,6 +75,7 @@ public class SelectPanel : MonoBehaviour
     {
         chooseLVPanel.SetActive(true);
         selectPanel.SetActive(false);
+        SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
     }
 
     public void buttonLeft_clicked()
@@ -104,6 +106,7 @@ public class SelectPanel : MonoBehaviour
 
         //set_stage_image(stage);
         set_stage_text(stage);
+        SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
     }
 
     private void set_stage_text(int stage)
@@ -121,6 +124,8 @@ public class SelectPanel : MonoBehaviour
 
     public void buttonExit_clicked()
     {
+        SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
+
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
