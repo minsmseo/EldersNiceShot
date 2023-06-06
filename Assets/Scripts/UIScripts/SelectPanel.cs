@@ -17,6 +17,9 @@ public class SelectPanel : MonoBehaviour
     public GameObject selectPanel;
     public GameObject chooseLVPanel;
 
+    private string[] stageName = new string[2]{"체육관", "아이스링크"};
+
+
 
     public GameObject stageImage;
     private Image stageImageImageComponent;
@@ -39,10 +42,10 @@ public class SelectPanel : MonoBehaviour
         //}
         stageCount = 2;
         //previewSprites = new Sprite[stageCount];
-        currentStage = 1;
+        currentStage = 0;
 
-        stageText.text = "stage: " + currentStage.ToString();
-        currentStage++;
+        //stageText.text = "stage: " + currentStage.ToString();
+        stageText.text = stageName[currentStage];
 
         buttonLeft.GetComponent<Button>().onClick.AddListener(ButtonLeftClicked);
         buttonRight.GetComponent<Button>().onClick.AddListener(ButtonRightClicked);
@@ -114,7 +117,8 @@ public class SelectPanel : MonoBehaviour
     {
         
         int stageNum = stage + 1;
-        stageText.text = "stage: " + stageNum.ToString();
+        stageText.text = stageName[stage];
+        Debug.Log(stageText.text);
         
     }
 

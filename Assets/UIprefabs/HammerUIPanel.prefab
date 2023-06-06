@@ -1171,7 +1171,7 @@ MonoBehaviour:
   manualButton: {fileID: 3348119592243078971}
   backButton: {fileID: 5444979478632868963}
   exitButton: {fileID: 4452724438123026264}
-  closeButton: {fileID: 0}
+  closeButton: {fileID: 1903519718023320070}
   hammerUIPanel: {fileID: 6216749541906097950}
 --- !u!1 &7222880174642747309
 GameObject:

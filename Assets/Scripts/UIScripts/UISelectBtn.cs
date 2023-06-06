@@ -11,12 +11,12 @@ public class UISelectBtn : MonoBehaviour
 {
     public InputDeviceCharacteristics rightControllerCharacteristics, leftControllerCharacteristics;
     private InputDevice rightDevice, leftDevice;
-    public Button settingButton, manualButton, backButton, exitButton;
+    public Button settingButton, manualButton, backButton, closeButton, exitButton;
 
-    private Button[] UIButtons = new Button[4];
+    private Button[] UIButtons = new Button[5];
 
     private int selectNum = 0;
-    private ColorBlock[] oldCol = new ColorBlock[4];
+    private ColorBlock[] oldCol = new ColorBlock[5];
     private ColorBlock selectCol;
 
     private bool isThumbstickUp = false;
@@ -40,7 +40,7 @@ public class UISelectBtn : MonoBehaviour
         selectCol = UIButtons[selectNum].colors;
         selectCol.normalColor = new Color(1f, 0f, 0f, 1f);
         UIButtons[selectNum].colors = selectCol;
-        //0번째 btn 색 바꾸기 시작 
+        //0번째 btn 색 바꾸고 시작 
     }
 
 
@@ -49,7 +49,8 @@ public class UISelectBtn : MonoBehaviour
         UIButtons[0] = settingButton;
         UIButtons[1] = manualButton;
         UIButtons[2] = backButton;
-        UIButtons[3] = exitButton;
+        UIButtons[3] = closeButton;
+        UIButtons[4] = exitButton;
     }
 
 
