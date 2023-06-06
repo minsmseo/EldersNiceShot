@@ -11,6 +11,7 @@ public class HammerUIPanel : MonoBehaviour
     public Button manualButton;
     public Button backButton;
     public Button exitButton;
+    public Button closeButton;
 
     public GameObject hammerUIPanel;
 
@@ -18,21 +19,16 @@ public class HammerUIPanel : MonoBehaviour
 
     public void Awake()
     {
-        SetAddListener();
-        
+        SetAddListener();   
     }
 
-
-   
-
-
     public void SetAddListener()
-    {
-        Debug.Log("add all the listener");
+    {      
         settingButton.onClick.AddListener(buttonSetting_clicked);
         manualButton.onClick.AddListener(buttonManual_clicked);
         backButton.onClick.AddListener(buttonBack_clicked);
         exitButton.onClick.AddListener(buttonExit_clicked);
+        closeButton.onClick.AddListener(buttonClose_clicked);
 
     }
     public void buttonSetting_clicked()
@@ -61,6 +57,12 @@ public class HammerUIPanel : MonoBehaviour
 #else
         Application.Quit(); 
 #endif
+    }
+
+    public void buttonClose_clicked()
+    {
+        hammerUIPanel.SetActive(false);
+
     }
 
 
