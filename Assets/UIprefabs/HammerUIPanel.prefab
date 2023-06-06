@@ -1058,7 +1058,7 @@ GameObject:
   - component: {fileID: 1287881512407094026}
   - component: {fileID: 2257922759006637674}
   - component: {fileID: 2747867202108144740}
-  - component: {fileID: 243409325602918974}
+  - component: {fileID: 979866034707513224}
   m_Layer: 5
   m_Name: HammerUIPanel
   m_TagString: Untagged
@@ -1088,8 +1088,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 53.682922, y: -6.9512024}
-  m_SizeDelta: {x: -736.8258, y: -13.9024}
+  m_AnchoredPosition: {x: -7.3461914, y: 18.868805}
+  m_SizeDelta: {x: -614.7676, y: 37.7376}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1287881512407094026
 CanvasRenderer:
@@ -1155,7 +1155,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &243409325602918974
+--- !u!114 &979866034707513224
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1164,15 +1164,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6216749541906097950}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c7b2e4ddacfc5046b54760afd8bab89, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a4217356acada54aafa6ad436459df2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rightControllerCharacteristics: 512
+  leftControllerCharacteristics: 256
   settingButton: {fileID: 7222419036035823058}
   manualButton: {fileID: 3348119592243078971}
   backButton: {fileID: 5444979478632868963}
-  exitButton: {fileID: 4452724438123026264}
   closeButton: {fileID: 1903519718023320070}
-  hammerUIPanel: {fileID: 6216749541906097950}
+  exitButton: {fileID: 4452724438123026264}
 --- !u!1 &7222880174642747309
 GameObject:
   m_ObjectHideFlags: 0
