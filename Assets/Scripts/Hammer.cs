@@ -18,4 +18,16 @@ public class Hammer : MonoBehaviour
     {
         
     }
+
+    /*
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+            Vector3 force = this.GetComponent<Rigidbody>().velocity;
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(3, 0, 0);
+            Debug.Log(force);
+            Debug.Log("push!");
+        }
+    } */
 }

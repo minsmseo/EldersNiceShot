@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Gate : MonoBehaviour
 {
-    public Vector3 front;
-    public Vector3 back;
     public bool gateAxisIsX;
     public bool isFrontPositive;
     public Vector3 point_in;
@@ -26,7 +24,7 @@ public class Gate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Ball")
+        if (other.CompareTag("Ball"))
         {
             point_in = other.transform.position;
         }
@@ -35,7 +33,7 @@ public class Gate : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         Debug.Log("something Detected");
-        if (other.tag == "Ball")
+        if (other.CompareTag("Ball"))
         {
             point_out = other.transform.position;
             passed_ball = other.GetComponent<Ball>();
@@ -93,9 +91,9 @@ public class Gate : MonoBehaviour
         if (passed_ball.target_gate == gate_number)
         {
             passed_ball.target_gate++;
-            passed_ball.score++;
+            GameManager.Instance.score[GameManager.Instance.cur_ball-1]++;
         }
-        
+        GameManager.Instance.UpdateScore();
     }
 
     private void ResetValue()

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - btn
   - Ball
+  - Hammer
+  - Border
   layers:
   - Default
   - TransparentFX

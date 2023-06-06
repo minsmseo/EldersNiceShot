@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "NextTurn",
+                    "type": "Button",
+                    "id": "e038fafb-b045-409c-b8ec-e2ecadd86952",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -110,6 +119,17 @@
                     "processors": "",
                     "groups": "VR",
                     "action": "ToggleStick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "49d05ffa-3536-480a-b5f1-a4dc6fa3be7c",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "NextTurn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
