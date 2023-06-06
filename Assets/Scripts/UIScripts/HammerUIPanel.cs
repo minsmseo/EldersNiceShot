@@ -14,11 +14,13 @@ public class HammerUIPanel : MonoBehaviour
     public Button closeButton;
 
     public GameObject hammerUIPanel;
+    public GameObject manualPanel;
 
 
 
     public void Awake()
     {
+        manualPanel.SetActive(false);
         SetAddListener();   
     }
 
@@ -42,6 +44,8 @@ public class HammerUIPanel : MonoBehaviour
     public void buttonManual_clicked()
     {
         hammerUIPanel.SetActive(false);
+        manualPanel.SetActive(true);
+
 
     }
 
