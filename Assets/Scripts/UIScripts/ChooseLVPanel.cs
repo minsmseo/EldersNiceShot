@@ -10,12 +10,14 @@ public class ChooseLVPanel : MonoBehaviour
     //public GameObject buttonExit;
     //public GameObject level1, level2;
     public GameObject chooseLVPanel, selectPanel;
+    public GameObject FirstPanel;
 
     public GameObject stageImage;
     private int currentLevel;
 
     public Button level1Button, level2Button, exitButton;
-   
+    public Button startButton, lobbyManualButton;
+
 
 
     //private Image stageImageImageComponent;
@@ -35,12 +37,15 @@ public class ChooseLVPanel : MonoBehaviour
         //previewSprites = new Sprite[stageCount];
         //currentStage = 1;
 
-        chooseLVPanel.SetActive(true);
+
+        FirstPanel.SetActive(true);
+        chooseLVPanel.SetActive(false);
         selectPanel.SetActive(false);
 
         //level1Button = level1.GetComponent<Button>();
         //level2Button = level2.GetComponent<Button>();
-
+        lobbyManualButton.onClick.AddListener(ShowManual);
+        startButton.onClick.AddListener(GameStart);
         level1Button.onClick.AddListener(choose_level1);
         level2Button.onClick.AddListener(choose_level2);
         exitButton.onClick.AddListener(buttonExit_clicked);
@@ -51,11 +56,28 @@ public class ChooseLVPanel : MonoBehaviour
     }
 
 
+    public void ShowManual()
+    {
+        SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
+        chooseLVPanel.SetActive(false);
+    }
+
 
     //public void stageimage_clicked()
     //{
 
     //}
+
+    public void GameStart()
+    {
+        FirstPanel.SetActive(false);
+        chooseLVPanel.SetActive(true);
+        SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
+
+
+    }
+
+
 
 
 
