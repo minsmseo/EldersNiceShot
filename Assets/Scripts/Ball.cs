@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour
     public int target_gate;
     public int score;
     public bool out_ball;
+    public bool complete;
     public Vector3 last_loc;
 
     // Start is called before the first frame update

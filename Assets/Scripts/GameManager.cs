@@ -24,13 +24,11 @@ public class GameManager : MonoBehaviour
     public int cur_ball; // 현재 차례인 공의 번호
     public enum phase { start, ready, strike, done, setting };
     public phase turnPhase; // 0 : 초기, 1 : 스틱활성화, 2 : 공 타격, 3 : 공 움직임 완료(턴 넘기기 직전), 5 : 설정
-    public Hammer hammer;
-    private GameObject hammer_head;
-    private GameObject hammer_stick;
     public Vector3 start_loc;
     public GameObject[] balls;
     public int[] score;
     public int number_of_players;
+    public int complete_balls;
     public int red_score;
     public int blue_score;
 
@@ -50,8 +48,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hammer_head = hammer.hammer_head;
-        hammer_stick = hammer.hammer_stick;
+        
     }
 
     // Update is called once per frame
@@ -70,7 +67,9 @@ public class GameManager : MonoBehaviour
             balls[i].GetComponent<Ball>().target_gate = 1;
             balls[i].GetComponent<Ball>().last_loc = start_loc; //초기 위치좌표로 수정
             balls[i].GetComponent<Ball>().out_ball = true;
+            balls[i].gameObject.SetActive(false);
         }
+        UpdateScore();
         // 타이머 초기화
     }
 
@@ -98,31 +97,38 @@ public class GameManager : MonoBehaviour
     {
         if (turnPhase == phase.start)
         {
-            hammer_head.GetComponent<BoxCollider>().isTrigger = false;
-            hammer_stick.GetComponent<CapsuleCollider>().isTrigger = false;
+            for (int i = 0; i < number_of_players; i++)
+            {
+                balls[i].GetComponent<Rigidbody>().isKinematic = false;
+            }
             turnPhase = phase.ready;
         }
         else if (turnPhase == phase.ready)
         {
-            hammer_head.GetComponent<BoxCollider>().isTrigger = true;
-            hammer_stick.GetComponent<CapsuleCollider>().isTrigger = true;
+            for (int i = 0; i < number_of_players; i++)
+            {
+                balls[i].GetComponent<Rigidbody>().isKinematic = true;
+            }
             turnPhase = phase.start;
         }
     }
-
 
     public void OnNextTurn(InputAction.CallbackContext context)
     {
         if (turnPhase == phase.done)
         {
-            if (cur_ball < number_of_players)
-            {
-                cur_ball++;
-            }
-
-            else
+            cur_ball++;
+            if (cur_ball > number_of_players)
             {
                 cur_ball = 1;
+            }
+            while(balls[cur_ball - 1].GetComponent<Ball>().complete == true)
+            {
+                cur_ball++;
+                if (cur_ball > number_of_players)
+                {
+                    cur_ball = 1;
+                }
             }
 
             turnPhase = phase.start;
@@ -136,5 +142,10 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("It's not done phase");
         }
+    }
+
+    public void EndGame()
+    {
+
     }
 }
