@@ -14,7 +14,6 @@ public class UISelectBtn : MonoBehaviour
     public Button settingButton, manualButton, backButton, closeButton, exitButton;
 
     private Button[] UIButtons = new Button[5];
-
     private int selectNum = 0;
     private ColorBlock[] oldCol = new ColorBlock[5];
     private ColorBlock selectCol;
@@ -28,7 +27,20 @@ public class UISelectBtn : MonoBehaviour
     public void Awake()
     {
         TryInitialize();
-        SetButtonArray();
+        SettingButton();
+
+
+       
+    }
+
+
+    public void SettingButton()
+    {   
+        UIButtons[0] = settingButton;
+        UIButtons[1] = manualButton;
+        UIButtons[2] = backButton;
+        UIButtons[3] = closeButton;
+        UIButtons[4] = exitButton;
 
 
         for (int i = 0; i < UIButtons.Length; i++)
@@ -41,16 +53,6 @@ public class UISelectBtn : MonoBehaviour
         selectCol.normalColor = new Color(1f, 0f, 0f, 1f);
         UIButtons[selectNum].colors = selectCol;
         //0번째 btn 색 바꾸고 시작 
-    }
-
-
-    public void SetButtonArray()
-    {
-        UIButtons[0] = settingButton;
-        UIButtons[1] = manualButton;
-        UIButtons[2] = backButton;
-        UIButtons[3] = closeButton;
-        UIButtons[4] = exitButton;
     }
 
 

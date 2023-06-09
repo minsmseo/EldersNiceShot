@@ -42,17 +42,19 @@ public class ChooseLVPanel : MonoBehaviour
         chooseLVPanel.SetActive(false);
         selectPanel.SetActive(false);
 
-        //level1Button = level1.GetComponent<Button>();
-        //level2Button = level2.GetComponent<Button>();
+        SetAddListner();
+
+
+
+    }
+
+    public void SetAddListner()
+    {
         lobbyManualButton.onClick.AddListener(ShowManual);
         startButton.onClick.AddListener(GameStart);
         level1Button.onClick.AddListener(choose_level1);
         level2Button.onClick.AddListener(choose_level2);
         exitButton.onClick.AddListener(buttonExit_clicked);
-
-
-
-
     }
 
 
