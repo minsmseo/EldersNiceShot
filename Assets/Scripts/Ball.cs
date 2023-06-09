@@ -27,6 +27,7 @@ public class Ball : MonoBehaviour
         if (collision.transform.CompareTag("Hammer"))
         {
             GameManager.Instance.turnPhase = GameManager.phase.strike;
+            SoundManager.Instance.PlayEffectSound(eSFX.eHit_Weak);
             CheckThisBallIsMoving();
         }
     }
