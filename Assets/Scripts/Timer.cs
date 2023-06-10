@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
 
-    public float time = 30.0f;
+    public float time = .0f;
 
     void Update()
     {
@@ -16,9 +16,14 @@ public class Timer : MonoBehaviour
         double b = System.Math.Round(cntdnw, 2);
         UI controller ø¨∞·«ÿº≠ Text∞¥√º.text= b.toString(); «œ∏È µ 
         */
-        if (cntdnw < 0)
+        if (time < 0)
         {
             Debug.Log("Time out");
+            time = 0f;
         }
+    }
+    public void TimerStart(float _time)
+    {
+        time = _time;
     }
 }
