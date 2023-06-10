@@ -14,7 +14,7 @@ public class Timer : MonoBehaviour
         }
         /* some Text change
         double b = System.Math.Round(cntdnw, 2);
-        disvar.text = b.ToString();
+        UI controller ø¨∞·«ÿº≠ Text∞¥√º.text= b.toString(); «œ∏È µ 
         */
         if (cntdnw < 0)
         {
