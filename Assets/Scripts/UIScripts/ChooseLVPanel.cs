@@ -7,45 +7,33 @@ using TMPro;
 public class ChooseLVPanel : MonoBehaviour
 {
 
-    //public GameObject buttonExit;
-    //public GameObject level1, level2;
     public GameObject chooseLVPanel, selectPanel;
     public GameObject FirstPanel;
+    public GameObject ManaulCube;
 
     public GameObject stageImage;
     private int currentLevel;
 
     public Button level1Button, level2Button, exitButton;
-    public Button startButton, lobbyManualButton;
+    public Button startButton, lobbyManualButton, closeManaulButton;
 
-
-
-    //private Image stageImageImageComponent;
-    //private Sprite[] previewSprites;
 
 
     // Start is called before the first frame update
     void Awake()
     {
 
-        //if (stageImage != null)
-        //{
-        //    //이미지가 없다면 이미지 컴포턴트에서 가져온다 
-        //    stageImageImageComponent = stageImage.GetComponent<Image>();
-        //}
-        //stageCount = 2;
-        //previewSprites = new Sprite[stageCount];
-        //currentStage = 1;
-
 
         FirstPanel.SetActive(true);
         chooseLVPanel.SetActive(false);
         selectPanel.SetActive(false);
+        ManaulCube.SetActive(false);
 
-        //level1Button = level1.GetComponent<Button>();
-        //level2Button = level2.GetComponent<Button>();
+
+
         lobbyManualButton.onClick.AddListener(ShowManual);
-        startButton.onClick.AddListener(GameStart);
+        closeManaulButton.onClick.AddListener(CloseManaul);
+        startButton.onClick.AddListener(ReadyToPlay);
         level1Button.onClick.AddListener(choose_level1);
         level2Button.onClick.AddListener(choose_level2);
         exitButton.onClick.AddListener(buttonExit_clicked);
@@ -59,21 +47,28 @@ public class ChooseLVPanel : MonoBehaviour
     public void ShowManual()
     {
         SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
-        chooseLVPanel.SetActive(false);
+        ManaulCube.SetActive(true);
+        exitButton.gameObject.SetActive(false);
+        lobbyManualButton.gameObject.SetActive(false);
+        closeManaulButton.gameObject.SetActive(true);
+    }
+
+    public void CloseManaul()
+    {
+        SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
+        ManaulCube.SetActive(false);
+        exitButton.gameObject.SetActive(true);
+        lobbyManualButton.gameObject.SetActive(true);
+        closeManaulButton.gameObject.SetActive(false);
+
     }
 
 
-    //public void stageimage_clicked()
-    //{
-
-    //}
-
-    public void GameStart()
+    public void ReadyToPlay()
     {
         FirstPanel.SetActive(false);
         chooseLVPanel.SetActive(true);
         SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
-
 
     }
 
@@ -96,13 +91,6 @@ public class ChooseLVPanel : MonoBehaviour
     }
 
 
-
-    //private void set_stage_image(int stage)
-    //{
-    //    int index = stage - 1;
-    //    if (index < 0 || stageCount <= index || stageImageImageComponent == null) return;
-    //    stageImageImageComponent.sprite = previewSprites[index];
-    //}
 
     public void buttonExit_clicked()
     {

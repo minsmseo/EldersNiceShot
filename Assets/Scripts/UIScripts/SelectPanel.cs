@@ -12,10 +12,15 @@ public class SelectPanel : MonoBehaviour
     public GameObject buttonLeft;
     public GameObject buttonRight;
     public GameObject buttonBack;
+    public GameObject buttonStart;
     public TextMeshProUGUI stageText;
 
     public GameObject selectPanel;
     public GameObject chooseLVPanel;
+
+    public Sprite stage1;
+    public Sprite stage2;
+    
 
     private string[] stageName = new string[2]{"체육관", "아이스링크"};
 
@@ -35,40 +40,71 @@ public class SelectPanel : MonoBehaviour
     void Awake()
     {
 
-        //if (stageImage != null)
-        //{
-        //    //이미지가 없다면 이미지 컴포턴트에서 가져온다 
-        //    stageImageImageComponent = stageImage.GetComponent<Image>();
-        //}
-        stageCount = 2;
-        //previewSprites = new Sprite[stageCount];
-        currentStage = 0;
+        if (stageImage != null)
+        {
+            //이미지가 없다면 이미지 컴포턴트에서 가져온다 
+            stageImageImageComponent = stageImage.GetComponent<Image>();
+            
+        }
 
-        //stageText.text = "stage: " + currentStage.ToString();
+        stageCount = 2;
+        previewSprites = new Sprite[stageCount];
+        previewSprites[0] = stage1;
+        previewSprites[1] = stage2;
+
+        currentStage = 0;
         stageText.text = stageName[currentStage];
+        SetButtonEvent();
+
+
+
+
+    }
+
+    private void SetButtonEvent()
+    {
 
         buttonLeft.GetComponent<Button>().onClick.AddListener(ButtonLeftClicked);
         buttonRight.GetComponent<Button>().onClick.AddListener(ButtonRightClicked);
         buttonBack.GetComponent<Button>().onClick.AddListener(ButtonBackClicked);
-        stageImage.GetComponent<Button>().onClick.AddListener(MoveToGame);
-        
-        
-    }
+        buttonStart.GetComponent<Button>().onClick.AddListener(MoveToGame);
 
+    }
 
     public void MoveToGame()
     {
-        StartCoroutine(LoadingScene());
         SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
+        if (stageText.text.Equals(stageName[0]))
+        {
+            StartCoroutine(LoadingStage1());
+        }
+        else {
+
+            StartCoroutine(LoadingStage2());
+        }
+
+        //GameManger.Instance.StartGame();
+        Debug.Log("GameManager");
     }
 
-    IEnumerator LoadingScene()
+    IEnumerator LoadingStage1()
     {
         AsyncOperation loading = SceneManager.LoadSceneAsync("Stage_1");
         
         while (!loading.isDone) //씬 로딩 완료시 로딩완료시 완료
         {
             
+            yield return null;
+        }
+    }
+
+    IEnumerator LoadingStage2()
+    {
+        AsyncOperation loading = SceneManager.LoadSceneAsync("Stage_2");
+
+        while (!loading.isDone) //씬 로딩 완료시 로딩완료시 완료
+        {
+
             yield return null;
         }
     }
@@ -100,15 +136,11 @@ public class SelectPanel : MonoBehaviour
 
     }
 
-    public void stageImage_clicked()
-    {
-
-    }
 
     public void change_stage(int stage)
     {
 
-        //set_stage_image(stage);
+        set_stage_image(stage);
         set_stage_text(stage);
         SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
     }
@@ -116,18 +148,18 @@ public class SelectPanel : MonoBehaviour
     private void set_stage_text(int stage)
     {
         
-        int stageNum = stage + 1;
+        //int stageNum = stage + 1;
         stageText.text = stageName[stage];
         Debug.Log(stageText.text);
-        
+
     }
 
-    //private void set_stage_image(int stage)
-    //{
-    //    int index = stage - 1;
-    //    if (index < 0 || stageCount <= index || stageImageImageComponent == null) return;
-    //    stageImageImageComponent.sprite = previewSprites[index];
-    //}
+    private void set_stage_image(int stage)
+    {
+        int index = stage;
+        if (index < 0 || stageCount <= index || stageImageImageComponent == null) return;
+        stageImageImageComponent.sprite = previewSprites[index];
+    }
 
     public void buttonExit_clicked()
     {

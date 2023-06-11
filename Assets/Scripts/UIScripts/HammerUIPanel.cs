@@ -45,8 +45,6 @@ public class HammerUIPanel : MonoBehaviour
     {
         hammerUIPanel.SetActive(false);
         manualPanel.SetActive(true);
-
-
     }
 
     public void buttonBack_clicked()
