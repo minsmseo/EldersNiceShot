@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class HammerUIPanel : MonoBehaviour
 {
-    public Button settingButton;
+    //public Button settingButton;
     public Button manualButton;
     public Button backButton;
     public Button exitButton;
@@ -26,25 +26,26 @@ public class HammerUIPanel : MonoBehaviour
 
     public void SetAddListener()
     {      
-        settingButton.onClick.AddListener(buttonSetting_clicked);
+        //settingButton.onClick.AddListener(buttonSetting_clicked);
         manualButton.onClick.AddListener(buttonManual_clicked);
         backButton.onClick.AddListener(buttonBack_clicked);
         exitButton.onClick.AddListener(buttonExit_clicked);
         closeButton.onClick.AddListener(buttonClose_clicked);
 
     }
-    public void buttonSetting_clicked()
-    {
-        //hammerUIPanel.SetActive(false);
-        ColorBlock col = settingButton.colors;
-        col.normalColor = new Color(255, 20, 147);
-        settingButton.colors = col;             
-    }
+    //public void buttonSetting_clicked()
+    //{
+    //    hammerUIPanel.SetActive(false);
+    //    ColorBlock col = settingButton.colors;
+    //    col.normalColor = new Color(255, 20, 147);
+    //    settingButton.colors = col;
+    //}
 
     public void buttonManual_clicked()
     {
         hammerUIPanel.SetActive(false);
         manualPanel.SetActive(true);
+
     }
 
     public void buttonBack_clicked()

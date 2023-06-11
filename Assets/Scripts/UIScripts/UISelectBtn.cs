@@ -11,12 +11,14 @@ public class UISelectBtn : MonoBehaviour
 {
     public InputDeviceCharacteristics rightControllerCharacteristics, leftControllerCharacteristics;
     private InputDevice rightDevice, leftDevice;
-    public Button settingButton, manualButton, backButton, closeButton, exitButton;
+    public Button  manualButton, backButton, closeButton, exitButton;
+    public GameObject ManualPanel; 
 
-    private Button[] UIButtons = new Button[5];
+
+    private Button[] UIButtons = new Button[4];
 
     private int selectNum = 0;
-    private ColorBlock[] oldCol = new ColorBlock[5];
+    private ColorBlock[] oldCol = new ColorBlock[4];
     private ColorBlock selectCol;
 
     private bool isThumbstickUp = false;
@@ -25,7 +27,7 @@ public class UISelectBtn : MonoBehaviour
     //public Button btnPrefab;
 
 
-    public void Awake()
+    public void Start()
     {
         TryInitialize();
         SetButtonArray();
@@ -40,17 +42,17 @@ public class UISelectBtn : MonoBehaviour
         selectCol = UIButtons[selectNum].colors;
         selectCol.normalColor = new Color(1f, 0f, 0f, 1f);
         UIButtons[selectNum].colors = selectCol;
+        UIButtons[selectNum].gameObject.SetActive(true);
         //0번째 btn 색 바꾸고 시작 
     }
 
 
     public void SetButtonArray()
     {
-        UIButtons[0] = settingButton;
-        UIButtons[1] = manualButton;
-        UIButtons[2] = backButton;
-        UIButtons[3] = closeButton;
-        UIButtons[4] = exitButton;
+        UIButtons[0] = manualButton;
+        UIButtons[1] = backButton;
+        UIButtons[2] = closeButton;
+        UIButtons[3] = exitButton;        
     }
 
 
@@ -116,6 +118,11 @@ public class UISelectBtn : MonoBehaviour
             if (YButton == true)
             {
                 SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
+                if (ManualPanel.activeSelf)
+                {
+                    ManualPanel.SetActive(false);
+                    return;
+                }
                 UIButtons[selectNum].onClick.Invoke();
             }
         }
