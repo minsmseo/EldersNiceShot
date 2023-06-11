@@ -31,6 +31,7 @@ public class MovementDetector : MonoBehaviour
     {
         if (gamemanager.turnPhase == GameManager.phase.strike && gamemanager.balls[gamemanager.cur_ball-1] == this.gameObject)
         {
+            gamemanager.timer.pause = true;
             gamemanager.turnPhase = GameManager.phase.done;
         }
         this.GetComponent<Ball>().last_loc = this.transform.position;

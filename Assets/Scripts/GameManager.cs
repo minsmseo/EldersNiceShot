@@ -22,10 +22,11 @@ public class GameManager : MonoBehaviour
         }
     }
     public int cur_ball; // 현재 차례인 공의 번호
-    public enum phase { start, ready, strike, done, setting };
+    public enum phase { start, ready, strike, done, setting, lobby };
     public phase turnPhase; // 0 : 초기, 1 : 스틱활성화, 2 : 공 타격, 3 : 공 움직임 완료(턴 넘기기 직전), 5 : 설정
     public Vector3 start_loc;
     public GameObject[] balls;
+    public Timer timer;
     public int[] score;
     public int number_of_players;
     public int complete_balls;
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        turnPhase = phase.lobby;
     }
 
     // Update is called once per frame
@@ -59,18 +60,27 @@ public class GameManager : MonoBehaviour
 
     void StartGame()
     {
-        cur_ball = 1;
-        turnPhase = phase.start;
-        for (int i = 0; i < number_of_players; i++)
+        if (turnPhase == phase.lobby)
         {
-            score[i] = 0;
-            balls[i].GetComponent<Ball>().target_gate = 1;
-            balls[i].GetComponent<Ball>().last_loc = start_loc; //초기 위치좌표로 수정
-            balls[i].GetComponent<Ball>().out_ball = true;
-            balls[i].gameObject.SetActive(false);
+            Debug.Log("reset setting");
+            cur_ball = 1;
+            turnPhase = phase.start;
+            for (int i = 0; i < number_of_players; i++)
+            {
+                score[i] = 0;
+                balls[i].GetComponent<Ball>().target_gate = 1;
+                balls[i].GetComponent<Ball>().last_loc = start_loc; //초기 위치좌표로 수정
+                balls[i].GetComponent<Ball>().out_ball = true;
+                balls[i].gameObject.SetActive(false);
+            }
+            UpdateScore();
+            // 타이머 초기화
+            timer.TimerStart(600f);
+            balls[0].GetComponent<Ball>().out_ball = false;
+            balls[0].transform.rotation = Quaternion.Euler(0, 0, 0);
+            balls[0].transform.position = balls[0].GetComponent<Ball>().last_loc;
+            balls[0].gameObject.SetActive(true);
         }
-        UpdateScore();
-        // 타이머 초기화
     }
 
     public void UpdateScore()
@@ -115,6 +125,11 @@ public class GameManager : MonoBehaviour
 
     public void OnNextTurn(InputAction.CallbackContext context)
     {
+        if (timer.time <= 0f)
+        {
+            EndGame();
+            return;
+        } 
         if (turnPhase == phase.done)
         {
             cur_ball++;
@@ -132,10 +147,13 @@ public class GameManager : MonoBehaviour
             }
 
             turnPhase = phase.start;
+            timer.pause = false;
             if (balls[cur_ball - 1].GetComponent<Ball>().out_ball == true)
             {
+                balls[cur_ball - 1].transform.rotation = Quaternion.Euler(0, 0, 0);
                 balls[cur_ball - 1].transform.position = balls[cur_ball - 1].GetComponent<Ball>().last_loc;
                 balls[cur_ball - 1].SetActive(true);
+                balls[cur_ball - 1].GetComponent<Ball>().out_ball = false;
             }
         }
         else
@@ -144,8 +162,32 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void OnTestStart(InputAction.CallbackContext context)
+    {
+        Debug.Log("start game");
+        StartGame();
+    }
+
     public void EndGame()
     {
+        for (int i = 0; i < number_of_players; i++)
+        {
+            balls[i].gameObject.SetActive(false);
+        }
 
+        if (red_score > blue_score)
+        {
+            //RedTeamWin()
+        }
+        else if (blue_score >red_score)
+        {
+            //BlueTeamWin()
+        }
+        else
+        {
+            //Draw()
+        }
+
+        turnPhase = phase.lobby;
     }
 }

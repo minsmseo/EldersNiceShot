@@ -3,12 +3,12 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-
+    public bool pause;
     public float time = .0f;
 
     void Update()
     {
-        if (time > 0)
+        if (time > 0 && pause == false)
         {
             time -= Time.deltaTime;
         }
@@ -19,11 +19,22 @@ public class Timer : MonoBehaviour
         if (time < 0)
         {
             Debug.Log("Time out");
-            time = 0f;
+
+            this.GetComponent<Timer>().enabled = false;
         }
     }
     public void TimerStart(float _time)
     {
         time = _time;
+    }
+
+    public void PauseTimer()
+    {
+        pause = true;
+    }
+
+    public void ResumeTimer()
+    {
+        pause = false;
     }
 }
