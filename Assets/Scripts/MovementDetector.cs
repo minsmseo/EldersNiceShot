@@ -17,12 +17,17 @@ public class MovementDetector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (this.GetComponent<Rigidbody>().velocity.magnitude < 0.03f)
+        {
+            this.GetComponent<Rigidbody>().Sleep();
+        }
         if (rigidbody.IsSleeping())
         {
             disableThisScript();
         }
         if (this.gameObject.activeSelf == false)
         {
+            this.GetComponent<Rigidbody>().isKinematic = true;
             this.GetComponent<MovementDetector>().enabled = false;
         }
     }
@@ -34,7 +39,8 @@ public class MovementDetector : MonoBehaviour
             gamemanager.timer.pause = true;
             gamemanager.turnPhase = GameManager.phase.done;
         }
-        this.GetComponent<Ball>().last_loc = this.transform.position;
+        this.GetComponent<Ball>().SaveLocation();
+        this.GetComponent<Rigidbody>().isKinematic = true;
         this.GetComponent<MovementDetector>().enabled = false;
     }
 }

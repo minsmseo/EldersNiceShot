@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
                 balls[i].GetComponent<Ball>().target_gate = 1;
                 balls[i].GetComponent<Ball>().last_loc = start_loc; //초기 위치좌표로 수정
                 balls[i].GetComponent<Ball>().out_ball = true;
+                balls[i].GetComponent<Rigidbody>().isKinematic = true;
                 balls[i].gameObject.SetActive(false);
             }
             UpdateScore();
@@ -107,18 +108,12 @@ public class GameManager : MonoBehaviour
     {
         if (turnPhase == phase.start)
         {
-            for (int i = 0; i < number_of_players; i++)
-            {
-                balls[i].GetComponent<Rigidbody>().isKinematic = false;
-            }
+            balls[cur_ball-1].GetComponent<Rigidbody>().isKinematic = false;
             turnPhase = phase.ready;
         }
         else if (turnPhase == phase.ready)
         {
-            for (int i = 0; i < number_of_players; i++)
-            {
-                balls[i].GetComponent<Rigidbody>().isKinematic = true;
-            }
+            balls[cur_ball - 1].GetComponent<Rigidbody>().isKinematic = true;
             turnPhase = phase.start;
         }
     }
@@ -154,6 +149,10 @@ public class GameManager : MonoBehaviour
                 balls[cur_ball - 1].transform.position = balls[cur_ball - 1].GetComponent<Ball>().last_loc;
                 balls[cur_ball - 1].SetActive(true);
                 balls[cur_ball - 1].GetComponent<Ball>().out_ball = false;
+            }
+            for (int i = 0; i < number_of_players; i++)
+            {
+                balls[i].GetComponent<Rigidbody>().isKinematic = true;
             }
         }
         else

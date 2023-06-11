@@ -153,6 +153,17 @@
                 },
                 {
                     "name": "",
+                    "id": "969a560f-edb2-4412-a21b-0eef821f8916",
+                    "path": "<OculusTouchController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextTurn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "78aee156-135b-4b32-b213-081a15d6460e",
                     "path": "<Keyboard>/q",
                     "interactions": "",
@@ -169,6 +180,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
+                    "action": "StartTest",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "16276af9-8e64-4f75-8667-38ce7f9a5d43",
+                    "path": "<OculusTouchController>{LeftHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "StartTest",
                     "isComposite": false,
                     "isPartOfComposite": false

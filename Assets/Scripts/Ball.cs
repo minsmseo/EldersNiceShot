@@ -25,9 +25,18 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("Hammer"))
+        if (collision.transform.CompareTag("Hammer") & GameManager.Instance.turnPhase == GameManager.phase.ready)
         {
-            GameManager.Instance.turnPhase = GameManager.phase.strike;
+            if (ball_number == GameManager.Instance.cur_ball)
+                GameManager.Instance.turnPhase = GameManager.phase.strike;
+                CheckThisBallIsMoving();
+                for (int i = 0; i < GameManager.Instance.number_of_players; i++)
+                {
+                    GameManager.Instance.balls[i].GetComponent<Rigidbody>().isKinematic = false;
+                }
+        }
+        if (collision.transform.CompareTag("Ball"))
+        {
             CheckThisBallIsMoving();
         }
     }
@@ -37,8 +46,8 @@ public class Ball : MonoBehaviour
         this.GetComponent<MovementDetector>().enabled = true;
     }
 
-    void SaveLocation()
+    public void SaveLocation()
     {
-        last_loc = this.transform.position;
+        last_loc = new Vector3(this.transform.position.x, 0.01f, this.transform.position.z);
     }
 }
