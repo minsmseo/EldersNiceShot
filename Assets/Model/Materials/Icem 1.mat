@@ -99,7 +99,7 @@ Material:
     - _SrcBlend: 1
     - _SwitchDirec: 1
     - _Transp: 0.128
-    - _Transparency: 0.837
+    - _Transparency: 1
     - _UVSec: 0
     - _ZWrite: 1
     - _freeze: 0.46
