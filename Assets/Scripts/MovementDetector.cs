@@ -17,10 +17,6 @@ public class MovementDetector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.GetComponent<Rigidbody>().velocity.magnitude < 0.03f)
-        {
-            this.GetComponent<Rigidbody>().Sleep();
-        }
         if (rigidbody.IsSleeping())
         {
             disableThisScript();

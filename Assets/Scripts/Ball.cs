@@ -11,6 +11,11 @@ public class Ball : MonoBehaviour
     public bool complete;
     public Vector3 last_loc;
 
+
+    void DisableHammer()
+    {
+        GameManager.Instance.hammer.SetActive(false);
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +33,7 @@ public class Ball : MonoBehaviour
         if (collision.transform.CompareTag("Hammer") & GameManager.Instance.turnPhase == GameManager.phase.ready)
         {
             if (ball_number == GameManager.Instance.cur_ball)
+                Invoke("DisableHammer", 0.5f);
                 GameManager.Instance.turnPhase = GameManager.phase.strike;
                 CheckThisBallIsMoving();
                 for (int i = 0; i < GameManager.Instance.number_of_players; i++)
@@ -48,6 +54,6 @@ public class Ball : MonoBehaviour
 
     public void SaveLocation()
     {
-        last_loc = new Vector3(this.transform.position.x, 0.01f, this.transform.position.z);
+        last_loc = new Vector3(this.transform.position.x, 0f, this.transform.position.z);
     }
 }

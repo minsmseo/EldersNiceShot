@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public phase turnPhase; // 0 : 초기, 1 : 스틱활성화, 2 : 공 타격, 3 : 공 움직임 완료(턴 넘기기 직전), 5 : 설정
     public Vector3 start_loc;
     public GameObject[] balls;
+    public GameObject hammer;
     public Timer timer;
     public int[] score;
     public int number_of_players;
@@ -120,7 +121,7 @@ public class GameManager : MonoBehaviour
 
     public void OnNextTurn(InputAction.CallbackContext context)
     {
-        if (timer.time <= 0f)
+        if (timer.remain_time <= 0f)
         {
             EndGame();
             return;
@@ -154,6 +155,7 @@ public class GameManager : MonoBehaviour
             {
                 balls[i].GetComponent<Rigidbody>().isKinematic = true;
             }
+            hammer.SetActive(true);
         }
         else
         {
