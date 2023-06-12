@@ -24,6 +24,8 @@ public class SoundManager : MonoBehaviour
 	public AudioSource Effect;
 	public AudioSource BGM,Effectbgm;
 	public AudioClip[] EffectList, Effectbgmlist, GameOverList, BGMList;
+
+
 	// Random pitch adjustment range.
 	public float LowPitchRange = .95f;
 	public float HighPitchRange = 1.05f;
