@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - btn
+  - Ball
+  - Hammer
+  - Border
   layers:
   - Default
   - TransparentFX
