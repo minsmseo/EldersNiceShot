@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
             timer.TimerStart(600f);
             balls[0].GetComponent<Ball>().out_ball = false;
             balls[0].transform.rotation = Quaternion.Euler(0, 0, 0);
-            balls[0].transform.position = balls[0].GetComponent<Ball>().last_loc;
+            balls[0].transform.localPosition = balls[0].GetComponent<Ball>().last_loc;
             balls[0].gameObject.SetActive(true);
         }
     }
@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
             if (balls[cur_ball - 1].GetComponent<Ball>().out_ball == true)
             {
                 balls[cur_ball - 1].transform.rotation = Quaternion.Euler(0, 0, 0);
-                balls[cur_ball - 1].transform.position = balls[cur_ball - 1].GetComponent<Ball>().last_loc;
+                balls[cur_ball - 1].transform.localPosition = balls[cur_ball - 1].GetComponent<Ball>().last_loc;
                 balls[cur_ball - 1].SetActive(true);
                 balls[cur_ball - 1].GetComponent<Ball>().out_ball = false;
             }

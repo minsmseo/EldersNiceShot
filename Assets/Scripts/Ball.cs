@@ -54,6 +54,6 @@ public class Ball : MonoBehaviour
 
     public void SaveLocation()
     {
-        last_loc = new Vector3(this.transform.position.x, 0f, this.transform.position.z);
+        last_loc = new Vector3(this.transform.localPosition.x, 0f, this.transform.localPosition.z);
     }
 }

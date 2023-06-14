@@ -21,6 +21,6 @@ public class Border2 : MonoBehaviour
         var speed = collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude;
         var direction = Vector3.Reflect(collision.gameObject.GetComponent<Rigidbody>().velocity.normalized, collision.contacts[0].normal);
 
-        collision.gameObject.GetComponent<Rigidbody>().velocity = direction * Mathf.Max(speed, 5f);
+        collision.gameObject.GetComponent<Rigidbody>().velocity = direction * Mathf.Max(speed, 1f);
     }
 }
