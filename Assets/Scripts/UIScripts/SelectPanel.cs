@@ -83,7 +83,7 @@ public class SelectPanel : MonoBehaviour
             StartCoroutine(LoadingStage2());
         }
 
-        //GameManger.Instance.StartGame();
+        GameManager.Instance.StartGame();
         Debug.Log("GameManager");
     }
 
