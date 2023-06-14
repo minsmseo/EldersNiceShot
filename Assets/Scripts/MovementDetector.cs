@@ -39,6 +39,11 @@ public class MovementDetector : MonoBehaviour
             gamemanager.timer.pause = true;
             gamemanager.turnPhase = GameManager.phase.done;
             PlayerGuideCanvas.Instance.ChangeGuideText(4);
+
+            if (gamemanager.timer.remain_time <= 0f)
+            {
+                gamemanager.EndGame();
+            }
         }
         if (GetComponent<Ball>().target_gate == 1)
         {

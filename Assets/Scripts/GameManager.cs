@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public phase turnPhase; // 0 : 초기, 1 : 스틱활성화, 2 : 공 타격, 3 : 공 움직임 완료(턴 넘기기 직전), 5 : 설정
     public Vector3 start_loc;
     public GameObject[] balls;
+    public GameObject[] indicators;
     public GameObject hammer;
     public Timer timer;
     public int[] score;
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
         cur_ball = 1;
         turnPhase = phase.start;
         PlayerGuideCanvas.Instance.ChangeGuideText(1);
+        PlayerGuideCanvas.Instance.ChangeGuideTextColor(new Color32(68, 204, 204, 255));
         PlayerGuideCanvas.Instance.ChangeTurnGuideText();
         PlayerGuideCanvas.Instance.BallText.text = cur_ball + "번공 차례";
         for (int i = 0; i < number_of_players; i++)
@@ -82,6 +84,7 @@ public class GameManager : MonoBehaviour
         }
         UpdateScore();
         // 타이머 초기화
+        timer.enabled = true;
         timer.TimerStart(600f);
         balls[0].GetComponent<Ball>().out_ball = false;
         balls[0].transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -121,6 +124,7 @@ public class GameManager : MonoBehaviour
                 turnPhase = phase.ready;
                 hammer.SetActive(true);
                 timer.pause = false;
+                indicators[cur_ball - 1].SetActive(false);
                 PlayerGuideCanvas.Instance.ChangeGuideText(2);
             }
             else if (turnPhase == phase.ready)
@@ -139,11 +143,6 @@ public class GameManager : MonoBehaviour
         {
             if (turnPhase == phase.done)
             {
-                if (timer.remain_time <= 0f)
-                {
-                    EndGame();
-                    return;
-                }
                 cur_ball++;
                 if (cur_ball > number_of_players)
                 {
@@ -171,6 +170,7 @@ public class GameManager : MonoBehaviour
                 current_ball.GetComponent<Rigidbody>().isKinematic = false;
                 current_ball.transform.rotation = Quaternion.Euler(0, 0, 0);
                 current_ball.transform.localPosition = current_ball.GetComponent<Ball>().last_loc;
+                indicators[cur_ball - 1].SetActive(true);
                 current_ball.SetActive(true);
             }
             else
@@ -198,19 +198,21 @@ public class GameManager : MonoBehaviour
 
         if (red_score > blue_score)
         {
-            //RedTeamWin()
+            PlayerGuideCanvas.Instance.ChangeGuideText(5);
+            PlayerGuideCanvas.Instance.ChangeGuideTextColor(Color.red);
         }
         else if (blue_score >red_score)
         {
-            //BlueTeamWin()
+            PlayerGuideCanvas.Instance.ChangeGuideText(6);
+            PlayerGuideCanvas.Instance.ChangeGuideTextColor(Color.white);
         }
         else
         {
-            //Draw()
+            PlayerGuideCanvas.Instance.ChangeGuideText(7);
+            PlayerGuideCanvas.Instance.ChangeGuideTextColor(new Color32(68, 204, 204, 255));
         }
         cur_ball = 0;
         turnPhase = phase.lobby;
-        PlayerGuideCanvas.Instance.ChangeGuideText(0);
     }
 
     public void ResetGame()

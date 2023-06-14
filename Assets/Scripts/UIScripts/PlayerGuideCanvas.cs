@@ -29,7 +29,7 @@ public class PlayerGuideCanvas : MonoBehaviour
     public TextMeshProUGUI[] ScoresText;
     public TextMeshProUGUI[] TotalScoresText;
 
-    private string[] GuideTextArray = new string[5];
+    private string[] GuideTextArray = new string[8];
     private string[] TurnTextArray = new string[2] { "RED", "WHITE" };
 
     
@@ -54,7 +54,9 @@ public class PlayerGuideCanvas : MonoBehaviour
         GuideTextArray [2] = "공을 타격하세요!"; //ready
         GuideTextArray [3] = "공이 이동중입니다. . ."; //strike
         GuideTextArray [4] = "기기를 다음 사람에게 넘겨주고\n준비가 되었다면 B키를 눌러주세요"; //done
-
+        GuideTextArray[5] = "Red Team 승리!";
+        GuideTextArray[6] = "White Team 승리!";
+        GuideTextArray[7] = "무승부!";
     }
     // Update is called once per frame
     void Update()
@@ -65,6 +67,11 @@ public class PlayerGuideCanvas : MonoBehaviour
     public void ChangeGuideText(int i)
     {
         GuideText.text = GuideTextArray[i];
+    }
+
+    public void ChangeGuideTextColor(Color color)
+    {
+        GuideText.color = color;
     }
 
     public void ChangeTurnGuideText()
@@ -86,5 +93,4 @@ public class PlayerGuideCanvas : MonoBehaviour
             // Ex) BLUE Player의 차례입니다!
         }
     }
-
 }
