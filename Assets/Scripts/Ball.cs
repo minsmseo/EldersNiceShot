@@ -35,6 +35,7 @@ public class Ball : MonoBehaviour
             if (ball_number == GameManager.Instance.cur_ball)
                 Invoke("DisableHammer", 0.5f);
                 GameManager.Instance.turnPhase = GameManager.phase.strike;
+                PlayerGuideCanvas.Instance.ChangeGuideText(3);
                 CheckThisBallIsMoving();
                 for (int i = 0; i < GameManager.Instance.number_of_players; i++)
                 {
@@ -54,6 +55,6 @@ public class Ball : MonoBehaviour
 
     public void SaveLocation()
     {
-        last_loc = new Vector3(this.transform.position.x, 0f, this.transform.position.z);
+        last_loc = new Vector3(this.transform.localPosition.x, 0f, this.transform.localPosition.z);
     }
 }
