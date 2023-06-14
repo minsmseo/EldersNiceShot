@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class Border : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool isBorderlineX;
+    public float outline;
 
     // Update is called once per frame
     void Update()
@@ -20,17 +17,21 @@ public class Border : MonoBehaviour
     {
         if (other.CompareTag("Ball") & GameManager.Instance.turnPhase == GameManager.phase.strike)
         {
-            other.GetComponent<Ball>().last_loc = new Vector3(other.transform.position.x, 0.01f, other.transform.position.z);
-            other.GetComponent<Ball>().out_ball = true;
-            other.GetComponent<Rigidbody>().isKinematic = true;
-            other.gameObject.SetActive(false);
-            if (GameManager.Instance.cur_ball == other.GetComponent<Ball>().ball_number)
+            other.GetComponent<MovementDetector>().disableThisScript();
+            if (isBorderlineX == true)
             {
-                if (GameManager.Instance.turnPhase == GameManager.phase.strike)
-                {
-                    GameManager.Instance.turnPhase = GameManager.phase.done;
-                }
+                other.GetComponent<Ball>().last_loc = new Vector3(outline, 0.01f, other.transform.localPosition.z);
             }
+            else
+            {
+                other.GetComponent<Ball>().last_loc = new Vector3(other.transform.localPosition.x, 0.01f, outline);
+            }
+            if (other.GetComponent<Ball>().target_gate == 1)
+            {
+                this.GetComponent<Ball>().last_loc = GameManager.Instance.start_loc;
+            }
+            other.GetComponent<Ball>().out_ball = true;
+            other.gameObject.SetActive(false);
         }
     }
 }
