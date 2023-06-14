@@ -31,9 +31,6 @@ public class PlayerGuideCanvas : MonoBehaviour
 
     private string[] GuideTextArray = new string[5];
     private string[] TurnTextArray = new string[2] { "RED", "WHITE" };
-    //차례 알려주는 string 배열 
-    private int TurnCount = 0;
-    private int BallNum;
 
     
     private void Awake()
@@ -62,25 +59,6 @@ public class PlayerGuideCanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-
-    //Text변경 함수
-    void ChangeText()
-    {
-        /*
-        if(TurnCount%2 ==0)
-        {
-            TurnGuideText.text = TurnTextArray[0] + "Team의 차례";
-            // Ex) RED Player의 차례입니다!
-        }
-        else
-        {
-            TurnGuideText.text = TurnTextArray[1] + "Team의 차례";
-            // Ex) BLUE Player의 차례입니다!
-        }
-        */
 
     }
 

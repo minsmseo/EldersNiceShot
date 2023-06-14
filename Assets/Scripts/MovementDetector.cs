@@ -21,14 +21,9 @@ public class MovementDetector : MonoBehaviour
         {
             disableThisScript();
         }
-        if (this.gameObject.activeSelf == false)
-        {
-            rigidbody.isKinematic = true;
-            this.GetComponent<MovementDetector>().enabled = false;
-        }
     }
 
-    void disableThisScript()
+    public void disableThisScript()
     {
         if (gamemanager.turnPhase == GameManager.phase.strike && gamemanager.balls[gamemanager.cur_ball-1] == this.gameObject)
         {
@@ -36,7 +31,15 @@ public class MovementDetector : MonoBehaviour
             gamemanager.turnPhase = GameManager.phase.done;
             PlayerGuideCanvas.Instance.ChangeGuideText(4);
         }
-        this.GetComponent<Ball>().SaveLocation();
+        if (this.GetComponent<Ball>().target_gate == 1)
+        {
+            this.GetComponent<Ball>().last_loc = gamemanager.start_loc;
+            this.gameObject.SetActive(false);
+        }
+        else
+        {
+            this.GetComponent<Ball>().SaveLocation();
+        }
         this.GetComponent<Rigidbody>().isKinematic = true;
         this.GetComponent<MovementDetector>().enabled = false;
     }
