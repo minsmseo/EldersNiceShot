@@ -21,9 +21,6 @@ public class UISelectBtn : MonoBehaviour
     private ColorBlock[] oldCol = new ColorBlock[4];
     private ColorBlock selectCol;
 
-    private bool isThumbstickUp = false;
-    private bool isThumbstickDown = false;
-
     //public Button btnPrefab;
 
 
@@ -68,20 +65,13 @@ public class UISelectBtn : MonoBehaviour
             Debug.Log(value.y);
             if (value.y > 0.25)
             {
-                isThumbstickUp = true;
                 ReturnOldBtnColor();
                 MoveUp();
             }
             else if (value.y < 0.25)
             {
-                isThumbstickDown = true;
                 ReturnOldBtnColor();
                 MoveDown();
-            }
-            else
-            {
-                isThumbstickUp = false;
-                isThumbstickDown = false;
             }
         }
 

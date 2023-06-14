@@ -14,16 +14,11 @@ public class FollowObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
         UIpanel.transform.position = mainCam.transform.position + 3*mainCam.transform.forward;
         UIpanel.transform.rotation = mainCam.transform.rotation;
 
         manualPanel.transform.position = mainCam.transform.position + 6* mainCam.transform.forward;
         manualPanel.transform.rotation = mainCam.transform.rotation;
-
-
-
     }
 }
 

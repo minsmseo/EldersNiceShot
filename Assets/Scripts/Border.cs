@@ -28,9 +28,8 @@ public class Border : MonoBehaviour
             }
             if (other.GetComponent<Ball>().target_gate == 1)
             {
-                this.GetComponent<Ball>().last_loc = GameManager.Instance.start_loc;
+                other.GetComponent<Ball>().last_loc = GameManager.Instance.start_loc;
             }
-            other.GetComponent<Ball>().out_ball = true;
             other.gameObject.SetActive(false);
         }
     }

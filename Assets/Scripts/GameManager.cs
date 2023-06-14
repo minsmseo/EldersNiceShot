@@ -65,31 +65,28 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        if (turnPhase == phase.lobby)
+        Debug.Log("reset setting");
+        cur_ball = 1;
+        turnPhase = phase.start;
+        PlayerGuideCanvas.Instance.ChangeGuideText(1);
+        PlayerGuideCanvas.Instance.ChangeTurnGuideText();
+        PlayerGuideCanvas.Instance.BallText.text = cur_ball + "번공 차례";
+        for (int i = 0; i < number_of_players; i++)
         {
-            Debug.Log("reset setting");
-            cur_ball = 1;
-            turnPhase = phase.start;
-            PlayerGuideCanvas.Instance.ChangeGuideText(1);
-            PlayerGuideCanvas.Instance.ChangeTurnGuideText();
-            PlayerGuideCanvas.Instance.BallText.text = cur_ball + "번공 차례";
-            for (int i = 0; i < number_of_players; i++)
-            {
-                score[i] = 0;
-                balls[i].GetComponent<Ball>().target_gate = 1;
-                balls[i].GetComponent<Ball>().last_loc = start_loc; //초기 위치좌표로 수정
-                balls[i].GetComponent<Ball>().out_ball = true;
-                balls[i].GetComponent<Rigidbody>().isKinematic = true;
-                balls[i].gameObject.SetActive(false);
-            }
-            UpdateScore();
-            // 타이머 초기화
-            timer.TimerStart(600f);
-            balls[0].GetComponent<Ball>().out_ball = false;
-            balls[0].transform.rotation = Quaternion.Euler(0, 0, 0);
-            balls[0].transform.localPosition = balls[0].GetComponent<Ball>().last_loc;
-            balls[0].gameObject.SetActive(true);
+            score[i] = 0;
+            balls[i].GetComponent<Ball>().target_gate = 1;
+            balls[i].GetComponent<Ball>().last_loc = start_loc; //초기 위치좌표로 수정
+            balls[i].GetComponent<Ball>().out_ball = true;
+            balls[i].GetComponent<Rigidbody>().isKinematic = true;
+            balls[i].gameObject.SetActive(false);
         }
+        UpdateScore();
+        // 타이머 초기화
+        timer.TimerStart(600f);
+        balls[0].GetComponent<Ball>().out_ball = false;
+        balls[0].transform.rotation = Quaternion.Euler(0, 0, 0);
+        balls[0].transform.localPosition = balls[0].GetComponent<Ball>().last_loc;
+        balls[0].gameObject.SetActive(true);
     }
 
     public void UpdateScore()
@@ -122,12 +119,15 @@ public class GameManager : MonoBehaviour
             {
                 balls[cur_ball - 1].GetComponent<Rigidbody>().isKinematic = false;
                 turnPhase = phase.ready;
+                hammer.SetActive(true);
+                timer.pause = false;
                 PlayerGuideCanvas.Instance.ChangeGuideText(2);
             }
             else if (turnPhase == phase.ready)
             {
                 balls[cur_ball - 1].GetComponent<Rigidbody>().isKinematic = true;
                 turnPhase = phase.start;
+                hammer.SetActive(false);
                 PlayerGuideCanvas.Instance.ChangeGuideText(1);
             }
         }
@@ -137,13 +137,13 @@ public class GameManager : MonoBehaviour
     {
         if (context.started)
         {
-            if (timer.remain_time <= 0f)
-            {
-                EndGame();
-                return;
-            }
             if (turnPhase == phase.done)
             {
+                if (timer.remain_time <= 0f)
+                {
+                    EndGame();
+                    return;
+                }
                 cur_ball++;
                 if (cur_ball > number_of_players)
                 {
@@ -159,23 +159,19 @@ public class GameManager : MonoBehaviour
                 }
 
                 turnPhase = phase.start;
+                GameObject current_ball = balls[cur_ball-1];
                 PlayerGuideCanvas.Instance.ChangeGuideText(1);
                 PlayerGuideCanvas.Instance.ChangeTurnGuideText();
                 PlayerGuideCanvas.Instance.BallText.text = cur_ball + "번공 차례";
-                timer.pause = false;
-
-                if (balls[cur_ball - 1].GetComponent<Ball>().out_ball == true)
-                {
-                    balls[cur_ball - 1].transform.rotation = Quaternion.Euler(0, 0, 0);
-                    balls[cur_ball - 1].transform.localPosition = balls[cur_ball - 1].GetComponent<Ball>().last_loc;
-                    balls[cur_ball - 1].SetActive(true);
-                    balls[cur_ball - 1].GetComponent<Ball>().out_ball = false;
-                }
+                
                 for (int i = 0; i < number_of_players; i++)
                 {
-                    balls[i].GetComponent<Rigidbody>().isKinematic = true;
+                    balls[i].gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 }
-                hammer.SetActive(true);
+                current_ball.GetComponent<Rigidbody>().isKinematic = false;
+                current_ball.transform.rotation = Quaternion.Euler(0, 0, 0);
+                current_ball.transform.localPosition = current_ball.GetComponent<Ball>().last_loc;
+                current_ball.SetActive(true);
             }
             else
             {
@@ -186,7 +182,7 @@ public class GameManager : MonoBehaviour
 
     public void OnTestStart(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started & turnPhase == phase.lobby)
         {
             Debug.Log("start game");
             StartGame();
@@ -215,5 +211,11 @@ public class GameManager : MonoBehaviour
         cur_ball = 0;
         turnPhase = phase.lobby;
         PlayerGuideCanvas.Instance.ChangeGuideText(0);
+    }
+
+    public void ResetGame()
+    {
+        EndGame();
+        StartGame();
     }
 }

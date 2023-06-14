@@ -33,13 +33,13 @@ public class Ball : MonoBehaviour
         if (collision.transform.CompareTag("Hammer") & GameManager.Instance.turnPhase == GameManager.phase.ready)
         {
             if (ball_number == GameManager.Instance.cur_ball)
-                Invoke("DisableHammer", 0.5f);
+                Invoke("DisableHammer", 0.3f);
                 GameManager.Instance.turnPhase = GameManager.phase.strike;
                 PlayerGuideCanvas.Instance.ChangeGuideText(3);
                 CheckThisBallIsMoving();
                 for (int i = 0; i < GameManager.Instance.number_of_players; i++)
                 {
-                    GameManager.Instance.balls[i].GetComponent<Rigidbody>().isKinematic = false;
+                    GameManager.Instance.balls[i].gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 }
         }
         if (collision.transform.CompareTag("Ball"))
