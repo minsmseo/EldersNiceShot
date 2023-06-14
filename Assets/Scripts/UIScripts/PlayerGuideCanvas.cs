@@ -11,7 +11,7 @@ public class PlayerGuideCanvas : MonoBehaviour
     public TextMeshProUGUI BallText;
     public TextMeshProUGUI TurnGuideText;
 
-    private string[] GuideTextArray = new string[4];
+    private string[] GuideTextArray = new string[5];
     private string[] TurnTextArray = new string[2] { "RED", "BLUE" };
     //차례 알려주는 string 배열 
     private int TurnCount = 0;
@@ -25,10 +25,11 @@ public class PlayerGuideCanvas : MonoBehaviour
 
     void SetTextArray()
     {
-        GuideTextArray[0] = "공을 타격할 준비가 되었다면 A키를 누르세요"; //start
-        GuideTextArray [1] = "순서에 맞는 공을 타격하세요"; //ready
-        GuideTextArray [2] = " "; //strike
-        GuideTextArray [3] = "기기를 다음 사람에게 넘겨주고\n준비가 되었다면 X키를 눌러주세요"; //done
+        GuideTextArray[0] = "B버튼을 눌러 게임을 시작하세요"; //lobby
+        GuideTextArray[1] = "공을 타격할 준비가 되었다면 A키를 누르세요"; //start
+        GuideTextArray [2] = "순서에 맞는 공을 타격하세요"; //ready
+        GuideTextArray [3] = " "; //strike
+        GuideTextArray [4] = "기기를 다음 사람에게 넘겨주고\n준비가 되었다면 X키를 눌러주세요"; //done
 
     }
     // Update is called once per frame
