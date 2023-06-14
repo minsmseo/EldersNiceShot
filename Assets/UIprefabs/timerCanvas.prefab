@@ -115,7 +115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.9023, y: 3.8905}
+  m_AnchoredPosition: {x: 1.9023438, y: 3.890503}
   m_SizeDelta: {x: 377.0929, y: 142.5169}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6046209506793081572
@@ -193,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pause: 0
   remain_time: 0
+  timerText: {fileID: 6046209506954920972}
 --- !u!1 &6046209506954920974
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +206,7 @@ GameObject:
   - component: {fileID: 6046209506954921011}
   - component: {fileID: 6046209506954920972}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TimerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

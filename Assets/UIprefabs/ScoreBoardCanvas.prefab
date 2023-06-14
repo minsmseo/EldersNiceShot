@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6826094985882706682}
   - component: {fileID: 6826094985882706683}
   - component: {fileID: 6826094985882706680}
-  - component: {fileID: 6826094985882706684}
   m_Layer: 5
   m_Name: ScoreBoardCanvas
   m_TagString: Untagged
@@ -103,20 +102,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6826094985882706684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6826094985882706681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17a6edcb6d0162945bc795f04ded526f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreCube: {fileID: 0}
-  scoreCanvas: {fileID: 6826094985882706681}
 --- !u!1 &6826094985965457734
 GameObject:
   m_ObjectHideFlags: 0
