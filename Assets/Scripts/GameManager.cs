@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    void StartGame()
+    public void StartGame()
     {
         if (turnPhase == phase.lobby)
         {
