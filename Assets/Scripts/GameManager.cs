@@ -51,6 +51,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         turnPhase = phase.lobby;
+        cur_ball = 0;
+        PlayerGuideCanvas.Instance.ChangeGuideText(0);
+        PlayerGuideCanvas.Instance.ChangeTurnGuideText();
+        PlayerGuideCanvas.Instance.BallText.text = "";
     }
 
     // Update is called once per frame
@@ -66,6 +70,9 @@ public class GameManager : MonoBehaviour
             Debug.Log("reset setting");
             cur_ball = 1;
             turnPhase = phase.start;
+            PlayerGuideCanvas.Instance.ChangeGuideText(1);
+            PlayerGuideCanvas.Instance.ChangeTurnGuideText();
+            PlayerGuideCanvas.Instance.BallText.text = cur_ball + "¹ø°ø Â÷·Ê";
             for (int i = 0; i < number_of_players; i++)
             {
                 score[i] = 0;
@@ -92,17 +99,19 @@ public class GameManager : MonoBehaviour
         blue_score = 0;
         while (i < number_of_players)
         {
+            PlayerGuideCanvas.Instance.ScoresText[i].text = score[i].ToString();
             if (i % 2 == 0)
             {
                 red_score += score[i];
+                PlayerGuideCanvas.Instance.TotalScoresText[0].text = red_score.ToString();
             }
             else
             {
                 blue_score += score[i];
+                PlayerGuideCanvas.Instance.TotalScoresText[1].text = blue_score.ToString();
             }
             i++;
         }
-        Debug.Log($"Ball01 : {score[0]}, Ball02 : {score[1]}, Ball03 : {score[2]}, Ball04 : {score[3]}");
     }
 
     public void OnToggleStick(InputAction.CallbackContext context)
@@ -111,11 +120,13 @@ public class GameManager : MonoBehaviour
         {
             balls[cur_ball-1].GetComponent<Rigidbody>().isKinematic = false;
             turnPhase = phase.ready;
+            PlayerGuideCanvas.Instance.ChangeGuideText(2);
         }
         else if (turnPhase == phase.ready)
         {
             balls[cur_ball - 1].GetComponent<Rigidbody>().isKinematic = true;
             turnPhase = phase.start;
+            PlayerGuideCanvas.Instance.ChangeGuideText(1);
         }
     }
 
@@ -143,7 +154,11 @@ public class GameManager : MonoBehaviour
             }
 
             turnPhase = phase.start;
+            PlayerGuideCanvas.Instance.ChangeGuideText(1);
+            PlayerGuideCanvas.Instance.ChangeTurnGuideText();
+            PlayerGuideCanvas.Instance.BallText.text = cur_ball + "¹ø°ø Â÷·Ê";
             timer.pause = false;
+
             if (balls[cur_ball - 1].GetComponent<Ball>().out_ball == true)
             {
                 balls[cur_ball - 1].transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -188,7 +203,8 @@ public class GameManager : MonoBehaviour
         {
             //Draw()
         }
-
+        cur_ball = 0;
         turnPhase = phase.lobby;
+        PlayerGuideCanvas.Instance.ChangeGuideText(0);
     }
 }

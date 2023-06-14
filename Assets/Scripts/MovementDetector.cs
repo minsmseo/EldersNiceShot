@@ -23,7 +23,7 @@ public class MovementDetector : MonoBehaviour
         }
         if (this.gameObject.activeSelf == false)
         {
-            this.GetComponent<Rigidbody>().isKinematic = true;
+            rigidbody.isKinematic = true;
             this.GetComponent<MovementDetector>().enabled = false;
         }
     }
@@ -34,6 +34,7 @@ public class MovementDetector : MonoBehaviour
         {
             gamemanager.timer.pause = true;
             gamemanager.turnPhase = GameManager.phase.done;
+            PlayerGuideCanvas.Instance.ChangeGuideText(4);
         }
         this.GetComponent<Ball>().SaveLocation();
         this.GetComponent<Rigidbody>().isKinematic = true;

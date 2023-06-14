@@ -35,6 +35,7 @@ public class Ball : MonoBehaviour
             if (ball_number == GameManager.Instance.cur_ball)
                 Invoke("DisableHammer", 0.5f);
                 GameManager.Instance.turnPhase = GameManager.phase.strike;
+                PlayerGuideCanvas.Instance.ChangeGuideText(3);
                 CheckThisBallIsMoving();
                 for (int i = 0; i < GameManager.Instance.number_of_players; i++)
                 {
