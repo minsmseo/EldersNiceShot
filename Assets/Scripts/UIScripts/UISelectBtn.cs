@@ -4,13 +4,13 @@ using System;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 
 
 public class UISelectBtn : MonoBehaviour
 {
     public InputDeviceCharacteristics rightControllerCharacteristics, leftControllerCharacteristics;
-    private InputDevice rightDevice, leftDevice;
     public Button  manualButton, backButton, closeButton, exitButton;
     public GameObject ManualPanel; 
 
@@ -29,7 +29,6 @@ public class UISelectBtn : MonoBehaviour
 
     public void Start()
     {
-        TryInitialize();
         SetButtonArray();
 
 
@@ -55,76 +54,73 @@ public class UISelectBtn : MonoBehaviour
         UIButtons[3] = exitButton;        
     }
 
-
-
-    private void TryInitialize()
-    {
-        List<InputDevice> RinputDevices = new List<InputDevice>();
-        List<InputDevice> LinputDevices = new List<InputDevice>();
-
-        InputDevices.GetDevicesWithCharacteristics(rightControllerCharacteristics, RinputDevices);
-        InputDevices.GetDevicesWithCharacteristics(leftControllerCharacteristics, LinputDevices);
-
-        if (RinputDevices.Count > 0)
-        {
-            rightDevice = RinputDevices[0];
-        }
-
-        if (LinputDevices.Count > 0)
-        {
-            leftDevice = LinputDevices[0];
-        }
-    }
-
-
-
     private void Update()
     {
-        MoveJoyStick();
-        PressButton();
+
     }
 
-    private void MoveJoyStick()
+    public void MoveJoyStick(InputAction.CallbackContext context)
     {
-        if (rightDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 position))
+        if (context.started)
         {
-            if (position.y > 0.5f && !isThumbstickUp)
+            Vector2 value = context.ReadValue<Vector2>();
+            Debug.Log("Moving Joystick!");
+            Debug.Log(value.y);
+            if (value.y > 0.25)
             {
-               
                 isThumbstickUp = true;
                 ReturnOldBtnColor();
-                MoveUp();           
+                MoveUp();
             }
-            else if (position.y < -0.5f && !isThumbstickDown)
+            else if (value.y < 0.25)
             {
-               
                 isThumbstickDown = true;
                 ReturnOldBtnColor();
                 MoveDown();
-                
             }
-            else if (position.y >= -0.5f && position.y <= 0.5f)
+            else
             {
                 isThumbstickUp = false;
                 isThumbstickDown = false;
             }
         }
-    }
 
-    private void PressButton()
+        //if (rightDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 position))
+        //{
+        //    if (position.y > 0.5f && !isThumbstickUp)
+        //    {
+
+        //        isThumbstickUp = true;
+        //        ReturnOldBtnColor();
+        //        MoveUp();           
+        //    }
+        //    else if (position.y < -0.5f && !isThumbstickDown)
+        //    {
+
+        //        isThumbstickDown = true;
+        //        ReturnOldBtnColor();
+        //        MoveDown();
+
+        //    }
+        //    else if (position.y >= -0.5f && position.y <= 0.5f)
+        //    {
+        //        isThumbstickUp = false;
+        //        isThumbstickDown = false;
+        //    }
+        //}
+    }
+    public void PressButton(InputAction.CallbackContext context)
     {
-        if (leftDevice.TryGetFeatureValue(CommonUsages.secondaryButton, out bool YButton))
+        if (context.started)
         {
-            if (YButton == true)
+            //SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
+            if (ManualPanel.activeSelf)
             {
-                SoundManager.Instance.PlayEffectSound(eSFX.eUI_Button);
-                if (ManualPanel.activeSelf)
-                {
-                    ManualPanel.SetActive(false);
-                    return;
-                }
-                UIButtons[selectNum].onClick.Invoke();
+                ManualPanel.SetActive(false);
+                return;
             }
+            UIButtons[selectNum].onClick.Invoke();
+            Debug.Log("Button onClick!");
         }
     }
 

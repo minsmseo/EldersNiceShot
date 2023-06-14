@@ -116,72 +116,81 @@ public class GameManager : MonoBehaviour
 
     public void OnToggleStick(InputAction.CallbackContext context)
     {
-        if (turnPhase == phase.start)
+        if (context.started)
         {
-            balls[cur_ball-1].GetComponent<Rigidbody>().isKinematic = false;
-            turnPhase = phase.ready;
-            PlayerGuideCanvas.Instance.ChangeGuideText(2);
-        }
-        else if (turnPhase == phase.ready)
-        {
-            balls[cur_ball - 1].GetComponent<Rigidbody>().isKinematic = true;
-            turnPhase = phase.start;
-            PlayerGuideCanvas.Instance.ChangeGuideText(1);
+            if (turnPhase == phase.start)
+            {
+                balls[cur_ball - 1].GetComponent<Rigidbody>().isKinematic = false;
+                turnPhase = phase.ready;
+                PlayerGuideCanvas.Instance.ChangeGuideText(2);
+            }
+            else if (turnPhase == phase.ready)
+            {
+                balls[cur_ball - 1].GetComponent<Rigidbody>().isKinematic = true;
+                turnPhase = phase.start;
+                PlayerGuideCanvas.Instance.ChangeGuideText(1);
+            }
         }
     }
 
     public void OnNextTurn(InputAction.CallbackContext context)
     {
-        if (timer.remain_time <= 0f)
+        if (context.started)
         {
-            EndGame();
-            return;
-        } 
-        if (turnPhase == phase.done)
-        {
-            cur_ball++;
-            if (cur_ball > number_of_players)
+            if (timer.remain_time <= 0f)
             {
-                cur_ball = 1;
+                EndGame();
+                return;
             }
-            while(balls[cur_ball - 1].GetComponent<Ball>().complete == true)
+            if (turnPhase == phase.done)
             {
                 cur_ball++;
                 if (cur_ball > number_of_players)
                 {
                     cur_ball = 1;
                 }
-            }
+                while (balls[cur_ball - 1].GetComponent<Ball>().complete == true)
+                {
+                    cur_ball++;
+                    if (cur_ball > number_of_players)
+                    {
+                        cur_ball = 1;
+                    }
+                }
 
-            turnPhase = phase.start;
-            PlayerGuideCanvas.Instance.ChangeGuideText(1);
-            PlayerGuideCanvas.Instance.ChangeTurnGuideText();
-            PlayerGuideCanvas.Instance.BallText.text = cur_ball + "¹ø°ø Â÷·Ê";
-            timer.pause = false;
+                turnPhase = phase.start;
+                PlayerGuideCanvas.Instance.ChangeGuideText(1);
+                PlayerGuideCanvas.Instance.ChangeTurnGuideText();
+                PlayerGuideCanvas.Instance.BallText.text = cur_ball + "¹ø°ø Â÷·Ê";
+                timer.pause = false;
 
-            if (balls[cur_ball - 1].GetComponent<Ball>().out_ball == true)
-            {
-                balls[cur_ball - 1].transform.rotation = Quaternion.Euler(0, 0, 0);
-                balls[cur_ball - 1].transform.localPosition = balls[cur_ball - 1].GetComponent<Ball>().last_loc;
-                balls[cur_ball - 1].SetActive(true);
-                balls[cur_ball - 1].GetComponent<Ball>().out_ball = false;
+                if (balls[cur_ball - 1].GetComponent<Ball>().out_ball == true)
+                {
+                    balls[cur_ball - 1].transform.rotation = Quaternion.Euler(0, 0, 0);
+                    balls[cur_ball - 1].transform.localPosition = balls[cur_ball - 1].GetComponent<Ball>().last_loc;
+                    balls[cur_ball - 1].SetActive(true);
+                    balls[cur_ball - 1].GetComponent<Ball>().out_ball = false;
+                }
+                for (int i = 0; i < number_of_players; i++)
+                {
+                    balls[i].GetComponent<Rigidbody>().isKinematic = true;
+                }
+                hammer.SetActive(true);
             }
-            for (int i = 0; i < number_of_players; i++)
+            else
             {
-                balls[i].GetComponent<Rigidbody>().isKinematic = true;
+                Debug.Log("It's not done phase");
             }
-            hammer.SetActive(true);
-        }
-        else
-        {
-            Debug.Log("It's not done phase");
         }
     }
 
     public void OnTestStart(InputAction.CallbackContext context)
     {
-        Debug.Log("start game");
-        StartGame();
+        if (context.started)
+        {
+            Debug.Log("start game");
+            StartGame();
+        }
     }
 
     public void EndGame()

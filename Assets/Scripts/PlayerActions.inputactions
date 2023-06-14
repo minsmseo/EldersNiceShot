@@ -6,15 +6,6 @@
             "id": "4a7a3902-d68e-4da5-9c9e-05215ebfcaee",
             "actions": [
                 {
-                    "name": "Move",
-                    "type": "Value",
-                    "id": "25db2404-c4bf-4f7c-8fec-6a207e198f50",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "ToggleStick",
                     "type": "Button",
                     "id": "7b736278-203d-4565-a2e7-0d1d783e4bb3",
@@ -49,75 +40,27 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SelectSetting",
+                    "type": "Button",
+                    "id": "5b1fce98-2ff1-4087-b080-b62ee55e3603",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "StickUpDown",
+                    "type": "Value",
+                    "id": "0eecc428-d4a5-4a5b-820c-c9ff854d2ae1",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
-                {
-                    "name": "2D Vector",
-                    "id": "1f7a0b24-934f-49eb-91d2-12b41f502eb3",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "975457ad-9955-4a6d-9d1d-f75eed7ceea3",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "92f4a3a0-6e9b-4a3a-ac22-63ec8580f231",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "050d4fda-687f-46fd-9376-7038f3170c2b",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "351b6010-5ce8-4347-a1ee-62ac872cbfd4",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "b6fd7cc4-54d8-4026-be53-a9d2e0ccea82",
-                    "path": "<OculusTouchController>{RightHand}/thumbstick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "VR",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "7fac70c5-08c7-430d-8148-f6de24519308",
@@ -165,10 +108,21 @@
                 {
                     "name": "",
                     "id": "78aee156-135b-4b32-b213-081a15d6460e",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "PC",
+                    "action": "OpenSetting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0c11a783-eeab-4f71-b83a-643c6c898994",
+                    "path": "<OculusTouchController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "VR",
                     "action": "OpenSetting",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -192,6 +146,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "StartTest",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d22b4363-9ebe-4fbc-b08d-176c72e1d6c4",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "SelectSetting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cfa20ead-8d56-456b-84d1-8a699a2ac5b4",
+                    "path": "<OculusTouchController>{LeftHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "VR",
+                    "action": "SelectSetting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "756dec98-dd69-4bf6-90c9-f23d773d2d57",
+                    "path": "<OculusTouchController>{RightHand}/thumbstick",
+                    "interactions": "Sector(directions=1,pressPoint=0.25),Sector(directions=2,pressPoint=0.25)",
+                    "processors": "",
+                    "groups": "VR",
+                    "action": "StickUpDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

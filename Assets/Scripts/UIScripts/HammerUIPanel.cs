@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 
 public class HammerUIPanel : MonoBehaviour
@@ -21,6 +22,7 @@ public class HammerUIPanel : MonoBehaviour
     public void Awake()
     {
         manualPanel.SetActive(false);
+        hammerUIPanel.SetActive(false);
         SetAddListener();   
     }
 
@@ -51,6 +53,14 @@ public class HammerUIPanel : MonoBehaviour
     public void buttonBack_clicked()
     {
        SceneManager.LoadScene("Main_Lobby");
+    }
+
+    public void OpenUIPanel(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            hammerUIPanel.SetActive(true);
+        }
     }
 
     public void buttonExit_clicked()
