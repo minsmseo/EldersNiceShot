@@ -32,6 +32,7 @@ public class Ball : MonoBehaviour
     {
         if (collision.transform.CompareTag("Hammer") & GameManager.Instance.turnPhase == GameManager.phase.ready)
         {
+            SoundManager.Instance.PlayEffectSound(eSFX.eHit_Strong);
             if (ball_number == GameManager.Instance.cur_ball)
                 Invoke("DisableHammer", 0.3f);
                 GameManager.Instance.turnPhase = GameManager.phase.strike;
@@ -44,6 +45,7 @@ public class Ball : MonoBehaviour
         }
         if (collision.transform.CompareTag("Ball"))
         {
+            SoundManager.Instance.PlayEffectSound(eSFX.eHit_Weak);
             CheckThisBallIsMoving();
         }
     }
