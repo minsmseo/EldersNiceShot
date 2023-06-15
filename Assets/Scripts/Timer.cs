@@ -8,7 +8,7 @@ public class Timer : MonoBehaviour
     public bool pause;
     public float remain_time = 0f;
     public TextMeshProUGUI timerText;
-
+    public bool flag = false;
 
 
     void Update()
@@ -32,16 +32,18 @@ public class Timer : MonoBehaviour
 
 
 
-        if (remain_time < 0)
+        if (remain_time < 0 && flag==false)
         {
             Debug.Log("Time out");
 
-            this.GetComponent<Timer>().enabled = false;
+            timerText.gameObject.SetActive(false);
         }
     }
     public void TimerStart(float _time)
     {
         remain_time = _time;
+        timerText.gameObject.SetActive(true);
+        flag = true;
     }
 
     public void PauseTimer()
